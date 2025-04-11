@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";  
 
 const AddGuide = () => {
   return (
@@ -18,10 +19,12 @@ const AddGuide = () => {
         <p className="text-lg mb-6">
           Add your details to become a part of our network of tour guides to start connecting with travelers!
         </p>
-        <button className="bg-yellow-500 text-gray-900 font-semibold py-3 px-6 rounded-lg shadow-md 
-                           hover:bg-yellow-600 transition duration-300">
-          Add Profile
-        </button>
+        <Link to="/profileGuide">
+          <button className="bg-yellow-500 text-gray-900 font-semibold py-3 px-6 rounded-lg shadow-md 
+                            hover:bg-yellow-600 transition duration-300">
+            Add Profile
+          </button>
+          </Link>
       </div>
     </div>
   );

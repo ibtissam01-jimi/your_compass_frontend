@@ -1,57 +1,69 @@
-import React from "react";
+import React from 'react';
 
 const BusinessForm = () => {
   return (
-    <div className="relative min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/images/formbuss.jpg')" }}>
-      <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-      <div className="relative flex justify-center items-center h-full">
-        <form className="bg-black bg-opacity-70 p-8 rounded-lg shadow-lg max-w-md w-full text-white">
-          <h2 className="text-center text-2xl font-semibold mb-4">Add your business</h2>
-          
-          <label className="block">Business Name</label>
-          <input type="text" className="w-full p-2 mb-3 bg-transparent border-b border-gray-400 outline-none" />
+    <div className="min-h-screen bg-cover bg-center flex items-center justify-center"
+         style={{ backgroundImage: 'url("/images/formbuss.jpg")' }}>
+      <form className="bg-black bg-opacity-60 p-6 md:p-10 rounded-md w-full max-w-md text-white space-y-4">
+        <h1 className="text-3xl font-light text-center">
+          Your <span className="text-yellow-300 font-medium">Compass</span>
+        </h1>
+        <h2 className="text-xl font-semibold text-center">Add your business</h2>
 
-          <label className="block">Select Category</label>
-          <select className="w-full p-2 mb-3 bg-transparent border-b border-gray-400 outline-none">
-            <option>Select category</option>
+        <div>
+          <label className="block text-sm">business name</label>
+          <input type="text" className="w-full p-2 rounded bg-white text-black" placeholder="Enter business name" />
+        </div>
+
+        <div>
+          <label className="block text-sm">Select category</label>
+          <select className="w-full p-2 rounded bg-white text-black">
+            <option value="">-- Select --</option>
+            <option>Restaurant</option>
+            <option>Shop</option>
           </select>
-          
-          <label className="block">Business Description</label>
-          <textarea className="w-full p-2 mb-3 bg-transparent border-b border-gray-400 outline-none"></textarea>
-          
-          <label className="block">Business Picture</label>
-          <input type="file" className="w-full p-2 mb-3 bg-transparent border-b border-gray-400 outline-none" />
-          
-          <label className="block">Address</label>
-          <input type="text" placeholder="Street address" className="w-full p-2 mb-3 bg-transparent border-b border-gray-400 outline-none" />
-          
-          <div className="flex justify-between">
-            <input type="text" placeholder="City" className="w-1/2 p-2 mb-3 bg-transparent border-b border-gray-400 outline-none" />
-            <select className="w-1/2 p-2 mb-3 bg-transparent border-b border-gray-400 outline-none">
+        </div>
+
+        <div>
+          <label className="block text-sm">business Description</label>
+          <textarea className="w-full p-2 rounded bg-white text-black" placeholder="Description" rows="3" />
+        </div>
+
+        <div>
+          <label className="block text-sm">business Picture</label>
+          <input type="file" className="w-full p-1 bg-white text-black" />
+        </div>
+
+        <div>
+          <label className="block text-sm">Address</label>
+          <input type="text" className="w-full p-2 rounded bg-white text-black mb-2" placeholder="Street address" />
+          <div className="flex space-x-2">
+            <input type="text" className="w-1/2 p-2 rounded bg-white text-black" placeholder="City" />
+            <select className="w-1/2 p-2 rounded bg-white text-black">
               <option>Morocco</option>
+              <option>France</option>
+              <option>USA</option>
             </select>
           </div>
+        </div>
 
-          <h3 className="text-lg font-semibold mt-4">Business Contact</h3>
-          <label className="block">Address Email</label>
-          <input type="email" className="w-full p-2 mb-3 bg-transparent border-b border-gray-400 outline-none" />
-          
-          <label className="block">Business Phone Number</label>
-          <input type="tel" className="w-full p-2 mb-3 bg-transparent border-b border-gray-400 outline-none" />
-          
-          <h3 className="text-lg font-semibold mt-4">Manager Contact</h3>
-          <label className="block">Email</label>
-          <input type="email" className="w-full p-2 mb-3 bg-transparent border-b border-gray-400 outline-none" />
-          
-          <label className="block">Mobile</label>
-          <input type="tel" className="w-full p-2 mb-3 bg-transparent border-b border-gray-400 outline-none" />
+        <div>
+          <h3 className="font-semibold mt-4">business Contact</h3>
+          <input type="email" className="w-full p-2 rounded bg-white text-black mb-2" placeholder="Address Email" />
+          <input type="tel" className="w-full p-2 rounded bg-white text-black" placeholder="Phone number" />
+        </div>
 
-          <div className="flex justify-between mt-4">
-            <button type="button" className="px-6 py-2 border border-gray-300 text-gray-300 rounded-lg">Cancel</button>
-            <button type="submit" className="px-6 py-2 bg-yellow-500 text-white rounded-lg">Submit</button>
-          </div>
-        </form>
-      </div>
+        <div>
+          <h3 className="font-semibold mt-4">Manager contact</h3>
+          <input type="email" className="w-full p-2 rounded bg-white text-black mb-2" placeholder="Email" />
+          <input type="tel" className="w-full p-2 rounded bg-white text-black" placeholder="Mobile" />
+        </div>
+
+        <div className="flex justify-between mt-6">
+          <button type="reset" className="px-4 py-2 bg-white text-black rounded hover:bg-gray-200">Cancel</button>
+          <button type="submit" className="px-4 py-2 bg-yellow-400 text-black rounded hover:bg-yellow-500">Submit</button>
+        </div>
+      </form>
     </div>
   );
 };

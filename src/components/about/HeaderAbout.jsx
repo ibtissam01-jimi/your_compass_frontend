@@ -2,22 +2,22 @@ import React, { useState, useEffect } from "react";
 
 const slides = [
   {
-    image: "images/pict.png",
+    image: "images/aboutFirst.jpg",
     title: "Welcome to Morocco",
     description: "Your Compass, your gateway to discovering Morocco's magic.",
   },
   {
-    image: "images/chefch.png",
+    image: "images/chefchaouen.png",
     title: "Welcome to Chefchaouen",
     description: "Experience the enchanting blue city of Chefchaouen with Your Compass.",
   },
   {
-    image: "images/merr.png",
+    image: "images/merra.png",
     title: "Welcome to Marrakech",
     description: "Discover the magic of Marrakech with Your Compass.",
   },
   {
-    image: "images/pict2.jpg",
+    image: "images/tanger.png",
     title: "Welcome to Tangier",
     description: "Explore the vibrant beauty of Tangier with Your Compass.",
   },
