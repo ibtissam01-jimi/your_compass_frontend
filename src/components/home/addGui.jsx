@@ -5,10 +5,10 @@ const AddGuide = () => {
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center mt-20" 
          style={{ backgroundImage: "url('images/guide.jpg')" }}>
-      {/* التدرج المظلل لجعل الصورة أغمق */}
+      
       <div className="absolute inset-0 bg-black/70"></div>
 
-      {/* المحتوى الرئيسي فوق الخلفية */}
+    
       <div className="relative text-center text-white px-6 max-w-2xl">
         <p className="text-sm uppercase tracking-wide text-yellow-400 mb-2">
           Add your details to become a part of our network of tour guides to start connecting with travelers!

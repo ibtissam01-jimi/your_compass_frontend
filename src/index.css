@@ -139,6 +139,11 @@ button.signup-btn {
   color: white !important; 
 }
 
+button.cancel_buss{
+  background-color: #FFFFFF !important; 
+  color: #c5a76f !important; 
+}
+
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -162,3 +167,4 @@ button.signup-btn {
 .cv{
   background-color: #D9D9D9 !important;
 }
+

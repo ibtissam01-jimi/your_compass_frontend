@@ -20,6 +20,7 @@ function App() {
         <Route path="/about" element={<AboutPage/>}/>
         <Route path="/create_signup" element={<SignUp/>}/>
         <Route path="/signup_login" element={<LoginPage/>}/>
+        <Route path="/your-cancel-destination" element={<HomePage/>}/>
       </Routes>
     </Router>
   );
