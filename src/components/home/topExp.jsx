@@ -4,18 +4,18 @@ import { Heart, ChevronRight, ChevronLeft } from "lucide-react";
 const experiences = [
   {
     title: "Desert Camp in Morocco",
-    image: "/images/desert.jpg",
+    image: "images/sah.jpeg",
     votes: "12,670",
   },
   {
     title: "Quad Biking in Agadir",
-    image: "/images/quad.jpg",
+    image: "images/pict.png",
     votes: "13,211",
     isSelected: true, // Ajout pour montrer la bordure bleue
   },
   {
     title: "Best Day in Tangier",
-    image: "/images/tangier.jpg",
+    image: "images/abt.jpeg",
     votes: "2,777",
   },
 ];

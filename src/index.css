@@ -90,6 +90,43 @@ button:focus-visible {
     background-color: #c5a76f;
   }
 }
+.forget_password{
+  color: #0f3556;
+}
+
+button.eyes{
+  background-color: #ffffff !important; 
+}
+.create_account{
+  color: #0f3556;
+}
+
+button.login_button {
+  background-color: #0f3556 !important; 
+  color: #FFFFFF !important; 
+}
+
+button.sign_up_button{
+  background-color: #0f3556 !important; 
+  color: #FFFFFF !important; 
+}
+button.reset_password_button{
+  background-color: #0f3556 !important; 
+  color: #FFFFFF !important;
+}
+
+.create_account, .forget_password ,.login_signin {
+  text-decoration: underline !important;  
+  color: #0f3556;  
+}
+
+
+.create_account:hover, .forget_password:hover  ,.login_signin:hover{
+  color: #0f3556 !important; 
+  text-decoration: underline !important; 
+}
+
+
 
 
 button.login-btn {
@@ -119,4 +156,9 @@ button.signup-btn {
     background-color: #c5a76f !important;
     color: white !important;
   }
+}
+
+
+.cv{
+  background-color: #D9D9D9 !important;
 }

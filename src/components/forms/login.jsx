@@ -1,7 +1,10 @@
+
 import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { FaEnvelope, FaLock } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function LoginPage() {
   const BACKEND_URL = 'http://localhost:8000/api/login'
@@ -55,11 +58,14 @@ export default function LoginPage() {
               
               {...register("email",{required:true})}
             />
+
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 mb-2" htmlFor="password">
+
+          <div>
+            <label className="block text-sm font-medium mb-1 text-gray-700" htmlFor="password">
               Password
             </label>
+    <FaLock className="text-gray-400 mr-2" />
             <input
               type="password"
               id="password"
@@ -69,26 +75,30 @@ export default function LoginPage() {
               {...register("password",{required:true})}
             />
           </div>
-          <div className="mb-4 text-right">
-            <a href="#" className="text-sm text-gold hover:underline">
-              Forgot Password?
-            </a>
+
+          <div className="text-right text-sm">
+            <Link to="/forget_password">
+              <a href="#"  className="text-blue-800 hover:underline forget_password">
+                Forget Password ?
+              </a>
+            </Link>
           </div>
+
           <button
             type="submit"
-            className="w-full bg-[#0A2B4A] text-white py-2 rounded-lg font-semibold hover:bg-[#083a6b] transition-colors"
+            className="w-full bg-[#0f3556] text-white font-semibold py-2 rounded-md hover:bg-[#0d2d49] transition login_button"
           >
             Log in
           </button>
         </form>
-        <div className="mt-6 text-center">
-          <p className="text-gray-600">
-            Don’t have an account?{" "}
-            <a href="#" className="text-gold font-semibold hover:underline">
-              Create an account
-            </a>
-          </p>
-        </div>
+
+        <p className="text-sm text-gray-600 mt-6">
+          Don't have an account?
+          <Link to="/create_signup" className="text-blue-800 font-medium hover:underline ml-1 create_account">
+            Create an account
+          </Link>
+        </p>
+
       </div>
     </div>
   );
