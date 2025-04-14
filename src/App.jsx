@@ -7,6 +7,7 @@ import SignUp from "./components/forms/signin";
 import ResetPassword from "./components/forms/resetPassword";
 import ProfileForm from "./components/forms/addGuides";
 import AboutPage from "./components/pages/aboutPage";
+import Sidebar from "./components/admin/menuAdmin";
 function App() {
   return (
     <Router>
@@ -21,7 +22,9 @@ function App() {
         <Route path="/create_signup" element={<SignUp/>}/>
         <Route path="/signup_login" element={<LoginPage/>}/>
         <Route path="/your-cancel-destination" element={<HomePage/>}/>
+        <Route path="/admin" element={<Sidebar/>}/>
       </Routes>
+      
     </Router>
   );
 }
