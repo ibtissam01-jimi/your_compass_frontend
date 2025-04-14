@@ -1,9 +1,31 @@
+import axios from "axios";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const BACKEND_URL = 'http://localhost:8000/api/login'
+  
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const navigate = useNavigate();
 
+  const onSubmit =async data => {
+    try{
+
+      const response =await axios.post(BACKEND_URL,data);
+      if(response.status === 200){
+        alert('logged in');
+        console.log(response.data.Authorization.token)
+        navigate('/');
+      }
+    }catch(error){
+      alert('data not valide')
+      console.log('data not valide')
+
+    }
+  };
+
+  
   return (
     <div
       className="min-h-screen flex items-center justify-center" // توسيط الفورم
@@ -19,7 +41,8 @@ export default function LoginPage() {
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6">Login</h2>
         <p className="mb-4 text-gray-600">Add your details below to get back into the app</p>
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
+
           <div className="mb-4">
             <label className="block text-gray-700 mb-2" htmlFor="email">
               Email address
@@ -28,9 +51,9 @@ export default function LoginPage() {
               type="email"
               id="email"
               placeholder="e.g. abc@gmail.com"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold text-black"
+              
+              {...register("email",{required:true})}
             />
           </div>
           <div className="mb-4">
@@ -41,9 +64,9 @@ export default function LoginPage() {
               type="password"
               id="password"
               placeholder="Enter your password"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold text-black"
+              
+              {...register("password",{required:true})}
             />
           </div>
           <div className="mb-4 text-right">
