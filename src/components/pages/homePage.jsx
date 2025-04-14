@@ -9,6 +9,7 @@ import TourGuides from "../home/Guides";
 import AddGuide from "../home/addGui";
 import ExperienceSection from "../home/topExp";
 import Footer from "../home/footer";
+
 function HomePage() {
     return (
         <div className="w-full min-h-screen">

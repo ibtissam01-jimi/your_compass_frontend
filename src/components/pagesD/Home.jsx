@@ -1,15 +1,15 @@
 import React from 'react';
-import Navbar from '../components/Navbar';
-import NavbarSecondary from '../components/NavbarSecondary';
-import HeroSection from '../components/HeroSection';
-import Description from '../components/Description';
-import ImageCarousel from '../components/ImageCarousel'; // Importer le nouveau composant ImageCarousel
-import ThingsToDoPlaces from '../components/ThingsToDoPlaces';
-import PlacesToStay from '../components/PlacesToStay';
-import FoodAndDrink from '../components/FoodAndDrink';
-import RentalCars from '../components/RentalCars';
-import Footer from '../components/Footer';
-const Home = () => {
+import Navbar from "../home/menu";
+import NavbarSecondary from '../cities/NavbarSecondary';
+import HeroSection from '../cities/HeroSection';
+import Description from '../cities/Description';
+import ImageCarousel from '../cities/ImageCarousel'; // Importer le nouveau composant ImageCarousel
+import ThingsToDoPlaces from '../cities/ThingsToDoPlaces';
+import PlacesToStay from '../cities/PlacesToStay';
+import FoodAndDrink from '../cities/FoodAndDrink';
+import RentalCars from '../cities/RentalCars';
+import Footer from "../home/footer";
+const HomeD = () => {
   return (
     <div className="home">
       <Navbar />
@@ -26,4 +26,4 @@ const Home = () => {
   );
 }
 
-export default Home;
+export default HomeD;

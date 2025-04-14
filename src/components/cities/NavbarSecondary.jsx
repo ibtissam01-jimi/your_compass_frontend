@@ -4,49 +4,51 @@ import { Link } from 'react-router-dom';
 
 const NavbarSecondary = () => {
   return (
-    <nav className="flex justify-center items-center bg-gray-100 py-2 sticky top-0 z-[1000] shadow-md transition-all duration-300 mt-6 hover:bg-gray-200 hover:shadow-lg">
-      <div className="flex items-center mr-8 text-[#8B4513] text-lg transition-transform duration-300 hover:scale-110">
-        <FaMapMarkerAlt className="mr-2" />
-        <span className="location-text">Tangier</span>
-      </div>
-      <ul className="flex list-none p-0 m-0">
-        <li className="mx-4">
-          <Link
+    <nav className="bg-white py-3 px-6 shadow-sm sticky top-0 z-50 mt-[80px]"> {/* Marge de 80px */}
+      <div className="flex justify-center items-center space-x-12">
+        {/* Tangier Location */}
+        <div className="flex items-center group">
+          <FaMapMarkerAlt className="text-gray-700 mr-2 group-hover:text-amber-600 transition-colors" />
+          <span className="font-medium text-gray-800 group-hover:text-amber-600 transition-colors">
+            Tangier
+          </span>
+        </div>
+
+        {/* Navigation Links */}
+        <div className="flex items-center space-x-8">
+          <Link 
             to="/hotels"
-            className="flex items-center text-[#8B4513] no-underline font-sans text-base transition-all duration-300 hover:text-[#333] hover:-translate-y-1"
+            className="flex items-center px-3 py-2 rounded-lg hover:bg-gray-100 transition-all group"
           >
-            <FaHotel className="mr-2 transition-transform duration-300 group-hover:rotate-12" />
-            Hotels
+            <FaHotel className="text-gray-600 mr-2 group-hover:text-amber-600 transition-colors" />
+            <span className="text-gray-700 font-medium">Hotels</span>
           </Link>
-        </li>
-        <li className="mx-4">
-          <Link
+
+          <Link 
             to="/activities"
-            className="flex items-center text-[#8B4513] no-underline font-sans text-base transition-all duration-300 hover:text-[#333] hover:-translate-y-1"
+            className="flex items-center px-3 py-2 rounded-lg hover:bg-gray-100 transition-all group"
           >
-            <FaConciergeBell className="mr-2 transition-transform duration-300 group-hover:rotate-12" />
-            Activities
+            <FaConciergeBell className="text-gray-600 mr-2 group-hover:text-amber-600 transition-colors" />
+            <span className="text-gray-700 font-medium">Activities</span>
           </Link>
-        </li>
-        <li className="mx-4">
-          <Link
+
+          <Link 
             to="/restaurants"
-            className="flex items-center text-[#8B4513] no-underline font-sans text-base transition-all duration-300 hover:text-[#333] hover:-translate-y-1"
+            className="flex items-center px-3 py-2 rounded-lg hover:bg-gray-100 transition-all group"
           >
-            <FaUtensils className="mr-2 transition-transform duration-300 group-hover:rotate-12" />
-            Restaurants
+            <FaUtensils className="text-gray-600 mr-2 group-hover:text-amber-600 transition-colors" />
+            <span className="text-gray-700 font-medium">Restaurants</span>
           </Link>
-        </li>
-        <li className="mx-4">
-          <Link
+
+          <Link 
             to="/rental-cars"
-            className="flex items-center text-[#8B4513] no-underline font-sans text-base transition-all duration-300 hover:text-[#333] hover:-translate-y-1"
+            className="flex items-center px-3 py-2 rounded-lg hover:bg-gray-100 transition-all group"
           >
-            <FaCar className="mr-2 transition-transform duration-300 group-hover:rotate-12" />
-            Rental Cars
+            <FaCar className="text-gray-600 mr-2 group-hover:text-amber-600 transition-colors" />
+            <span className="text-gray-700 font-medium">Rental Cars</span>
           </Link>
-        </li>
-      </ul>
+        </div>
+      </div>
     </nav>
   );
 };

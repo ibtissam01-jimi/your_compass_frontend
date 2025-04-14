@@ -1,6 +1,6 @@
 import React from 'react';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import Navbar from '../cities/Navbar';
+import Footer from '../cities/Footer';
 
 const Service = () => {
   return (

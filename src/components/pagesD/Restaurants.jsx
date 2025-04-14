@@ -24,6 +24,9 @@ import bistroMerImg from '../assets/bistro_mer.jpg';
 import pashaImg from '../assets/pasha.jpg';
 import mediterraneenneImg from '../assets/mediterraneenne.jpg';
 import grillImg from '../assets/grill.jpg';
+import Navbar from "../home/menu";
+import Footer from "../home/footer";
+
 
 const restaurants = [
   { 
@@ -185,22 +188,29 @@ const restaurants = [
 ];
 
 const Restaurants = () => {
-  return (
-    <div>
-      <h1>Restaurants à Tanger</h1>
-      <p>Découvrez les meilleurs restaurants et saveurs locales.</p>
-      <div className="restaurants-list">
+  return ( <> <Navbar/>
+    <div className="bg-gray-100 py-16 px-4 sm:px-8 md:px-16">
+      <h1 className="text-4xl font-bold text-center text-[#0F3556] mb-6">Restaurants à Tanger</h1>
+      <p className="text-center text-lg text-gray-700 mb-12">Découvrez les meilleurs restaurants et saveurs locales.</p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {restaurants.map((restaurant, index) => (
-          <div key={index} className="restaurant-card">
-            <img src={restaurant.image} alt={restaurant.name} className="restaurant-image" />
-            <h2 className="restaurant-name">{restaurant.name}</h2>
-            <p className="restaurant-description">{restaurant.description}</p>
-            <p className="restaurant-price"><strong>Prix:</strong> {restaurant.price}</p>
+          <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-xl">
+            <img src={restaurant.image} alt={restaurant.name} className="w-full h-56 object-cover rounded-t-lg" />
+            <div className="p-6">
+              <h2 className="text-xl font-semibold text-[#0F3556] mb-2">{restaurant.name}</h2>
+              <p className="text-gray-600 text-sm mb-4">{restaurant.description}</p>
+              <p className="text-gray-600 text-sm mb-4">Prix: {restaurant.price}</p>
+            </div>
           </div>
         ))}
       </div>
     </div>
-  );
+   <Footer/> </>
+
+
+
+);
 };
+
 
 export default Restaurants;
