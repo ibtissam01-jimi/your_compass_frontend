@@ -14,4 +14,13 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'), // Alias '@' pour pointer vers 'src'
     },
   },
+  server: {
+    proxy: {
+      '/api': 'http://localhost:8000',
+    }
+  }
 })
+
+
+
+
