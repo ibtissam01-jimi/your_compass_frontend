@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 const ProfileForm = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-white">
-      <form className="bg-white p-6 w-full max-w-sm space-y-4 border border-gray-200 rounded shadow-sm">
-        <h2 className="text-center text-lg text-gray-500 font-medium mb-4">Add your Profile</h2>
+      <form className="bg-white p-6 w-full max-w-3xl space-y-4 border border-gray-200 rounded shadow-sm">
+        <h2 className="text-center text-lg text-[##c5a76f ]-500 font-medium mb-4"  style={{ color: '#c5a76f' }}>Add your Profile</h2>
 
         {/* First Name */}
         <div>
@@ -71,7 +72,7 @@ const ProfileForm = () => {
           <label className="block text-sm text-gray-700">Personal CV :</label>
           <input
             type="file"
-            className="w-full text-sm cv"
+            className="w-full h-12 p-2 bg-[#D9D9D9] text-sm border border-gray-300 rounded file:bg-transparent file:text-black file:border-none file:cursor-pointer"
           />
         </div>
 
@@ -86,16 +87,19 @@ const ProfileForm = () => {
         </div>
 
         {/* Buttons */}
-        <div className="flex justify-between pt-2">
-          <button
-            type="reset"
-            className="text-sm px-4 py-2 text-gray-500 border border-gray-200 rounded hover:bg-gray-100"
-          >
-            Cancel
-          </button>
+        <div className="flex justify-between pt-2 space-x-2">
+          <Link to="/your-cancel-destination"  className="w-1/2 text-xs px-2 py-1 text-gray-500 border border-gray-200 rounded shadow-lg hover:bg-gray-100 cancel_buss">
+
+            <button
+              type="reset"
+              className="w-1/2 text-xs px-2 py-1 text-gray-500 border border-gray-200 rounded shadow-lg hover:bg-gray-100 cancel_buss"
+            >
+              Cancel
+            </button>
+          </Link>
           <button
             type="submit"
-            className="text-sm px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700"
+            className="w-1/2 text-xs px-2 py-1 bg-yellow-600 text-white rounded shadow-lg hover:bg-yellow-700"
           >
             Submit
           </button>
