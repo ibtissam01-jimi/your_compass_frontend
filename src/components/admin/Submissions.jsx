@@ -56,7 +56,7 @@ const SubmissionsTable = () => {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Liste des Soumissions</h1>
+        <h1 className="text-2xl font-bold text-black">Liste des Soumissions</h1>
         <Link
             to="/admin/submissions/ajouter"
             className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"

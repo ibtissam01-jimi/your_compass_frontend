@@ -52,7 +52,7 @@ const Dashboard = () => {
   return (
     <div className="p-6 space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-semibold">Dashboard</h2>
+        <h1 className="text-xl font-semibold text-black">Dashboard</h1>
         <Button variant="outline">
           <Filter className="w-4 h-4 mr-2" />
           Filter Période

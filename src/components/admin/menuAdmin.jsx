@@ -3,7 +3,7 @@ import React from "react";
 import {
   HomeIcon,
   FileTextIcon,
-  EditIcon,
+  ServerIcon,
   UsersIcon,
   BriefcaseIcon,
   StarIcon,
@@ -13,12 +13,14 @@ import {
   BellIcon,
   SearchIcon,
   GlobeIcon,
+  
 } from "lucide-react";
 
 const menuItems = [
   { label: "Dashboard", icon: <HomeIcon className="w-5 h-5" />, key: "dashboard" },
+  
   { label: "Submissions", icon: <FileTextIcon className="w-5 h-5" />, key: "submission" },
-  { label: "Entries", icon: <EditIcon className="w-5 h-5" />, key: "entries" },
+  { label: "Services", icon: <ServerIcon className="w-5 h-5" />, key: "services" },
   { label: "Evaluators", icon: <UsersIcon className="w-5 h-5" />, key: "evaluators" },
   { label: "Categories", icon: <BriefcaseIcon className="w-5 h-5" />, key: "categories" },
   { label: "Reviews", icon: <StarIcon className="w-5 h-5" />, key: "reviews" },
@@ -37,7 +39,7 @@ const Sidebar = ({ setActivePage, activePage }) => {
           </h2>
           <div className="relative w-96">
             <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
-            <input
+           <input
               type="text"
               placeholder="Search for something..."
               className="pl-10 pr-4 py-2 w-full bg-white border border-gray-200 rounded-full shadow-sm text-black focus:outline-none focus:ring-2 focus:ring-[#c5a76f]"
