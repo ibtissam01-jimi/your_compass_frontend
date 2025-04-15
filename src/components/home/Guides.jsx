@@ -62,7 +62,6 @@
 
 
 
-
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -76,7 +75,13 @@ export default function TourGuides() {
   useEffect(() => {
     axios.get("http://localhost:8000/guides")
       .then(response => {
-        setGuides(response.data);
+        console.log("Réponse reçue :", response.data); // Pour debug
+        if (Array.isArray(response.data)) {
+          setGuides(response.data);
+        } else {
+          console.error("La réponse n'est pas un tableau :", response.data);
+          setGuides([]); // pour éviter les erreurs si ce n'est pas un tableau
+        }
       })
       .catch(error => {
         console.error("Erreur lors du chargement des guides touristiques :", error);
@@ -132,7 +137,7 @@ export default function TourGuides() {
               <div className="absolute inset-x-0 bottom-0 bg-black/50 flex justify-between items-center p-4">
                 <div className="text-left text-white">
                   <h3 className="text-xl font-bold">{guide.name}</h3>
-                  <p className="text-gray-300">{guide.expertise}</p>
+               
                 </div>
                 <button className="bg-yellow-500 text-gray-900 font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-yellow-600 transition duration-300">
                   See more
@@ -153,4 +158,3 @@ export default function TourGuides() {
     </div>
   );
 }
-
