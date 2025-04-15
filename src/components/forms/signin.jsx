@@ -154,8 +154,6 @@
 
 
 
-
-
 import { FaUser, FaFlag, FaEnvelope, FaLock } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -165,40 +163,34 @@ import axios from "axios";
 export default function SignUp() {
   const BACKEND_URL = 'http://localhost:8000/api/register';
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     console.log("Submitting...");
     try {
       const response = await axios.post(BACKEND_URL, data);
-      if ((response.status === 201 || response.status === 200)) {
+      if (response.status === 201 || response.status === 200) {
         alert('Signed in');
         console.log(response.data.Authorization.token);
         navigate('/login');
       }
-    }  catch (error) {
+    } catch (error) {
       console.log('Data not valid', error.response?.data || error.message);
-    
+
       if (error.response?.status === 422) {
         const errors = error.response.data.errors;
         let message = "Registration failed:\n";
-    
+
         for (const key in errors) {
           message += `${errors[key][0]}\n`;
         }
-    
+
         alert(message);
       } else {
         alert('Registration failed. Please check your info or try again.');
       }
     }
-    
   };
 
   return (
