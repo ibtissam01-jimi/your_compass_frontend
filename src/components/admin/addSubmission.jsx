@@ -1,144 +1,127 @@
 import React from "react";
-import { Input } from "@/components/ui/input";
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
 
-const AddSubmission = () => {
+function AddSubmission() {
   return (
-    <div className="max-w-2xl mx-auto p-6 space-y-6">
-      {/* Image preview */}
-      <div className="grid grid-cols-5 gap-2" aria-live="polite">
-        {Array.from({ length: 5 }).map((_, i) => (
-          <div key={i} className="h-24 w-full bg-gray-200 rounded-md overflow-hidden">
-            {/* Remplace ça par une preview réelle si disponible */}
+    <div className="max-w-2xl mx-auto p-6 bg-gray-100 shadow-md rounded-lg space-y-6">
+      {/* Images en haut */}
+      <div className="grid grid-cols-5 gap-2 rounded overflow-hidden">
+        {["pict.png", "pict2.jpg", "merr.png", "sah.jpeg", "tanger.png"].map((src, i) => (
+          <div key={i} className="h-24 w-full">
             <img
-              src={`https://source.unsplash.com/random/300x200?sig=${i}`}
-              alt={`Preview image ${i}`}
-              className="object-cover w-full h-full"
-              aria-describedby={`image-description-${i}`}
+              src={src}
+              alt={`Preview ${i + 1}`}
+              className="w-full h-full object-cover rounded"
             />
-            <p id={`image-description-${i}`} className="sr-only">
-              Aperçu de l'image {i + 1}.
-            </p>
           </div>
         ))}
       </div>
 
       {/* Formulaire */}
       <form className="space-y-4">
+        {/* Nom */}
         <div>
-          <Label htmlFor="business-name">Nom *</Label>
-          <Input 
-            id="business-name" 
-            placeholder="Nom du business" 
-            required 
-            aria-required="true" 
-            aria-labelledby="business-name" 
+          <label className="block font-medium mb-1 text-black">Name *</label>
+          <input
+            type="text"
+            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            defaultValue="Voyage Sorgun"
           />
         </div>
 
+        {/* Type */}
         <div>
-          <Label htmlFor="business-type">Type *</Label>
-          <Select id="business-type" aria-labelledby="business-type">
-            <SelectTrigger>
-              <SelectValue placeholder="Choisir le type" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="Hotel">Hôtel</SelectItem>
-              <SelectItem value="Restaurant">Restaurant</SelectItem>
-              <SelectItem value="Location">Location de voiture</SelectItem>
-            </SelectContent>
-          </Select>
+          <label className="block font-medium mb-1 text-black">Type *</label>
+          <select className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option>Hotels</option>
+            <option>Restaurants</option>
+            <option>Rentals</option>
+          </select>
         </div>
 
+        {/* Pays */}
         <div>
-          <Label htmlFor="business-country">Pays *</Label>
-          <Select id="business-country" aria-labelledby="business-country">
-            <SelectTrigger>
-              <SelectValue placeholder="Choisir le pays" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="Maroc">Maroc</SelectItem>
-              <SelectItem value="Turquie">Turquie</SelectItem>
-              <SelectItem value="France">France</SelectItem>
-            </SelectContent>
-          </Select>
+          <label className="block font-medium mb-1 text-black">Country *</label>
+          <select className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option>Turkey</option>
+          </select>
         </div>
 
+        {/* Ville */}
         <div>
-          <Label htmlFor="business-city">Ville *</Label>
-          <Select id="business-city" aria-labelledby="business-city">
-            <SelectTrigger>
-              <SelectValue placeholder="Choisir la ville" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="Fès">Fès</SelectItem>
-              <SelectItem value="Manavgat">Manavgat</SelectItem>
-              <SelectItem value="Casablanca">Casablanca</SelectItem>
-            </SelectContent>
-          </Select>
+          <label className="block font-medium mb-1 text-black">City *</label>
+          <select className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option>Manavgat</option>
+          </select>
         </div>
 
+        {/* Téléphone */}
         <div>
-          <Label htmlFor="phone-number">Numéro de téléphone *</Label>
-          <Input 
-            id="phone-number" 
-            placeholder="00 90 242 756 93 00" 
-            required 
-            aria-required="true" 
-            aria-labelledby="phone-number" 
+          <label className="block font-medium mb-1 text-black">Phone Number *</label>
+          <input
+            type="text"
+            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            defaultValue="00 90 242 756 93 00"
           />
         </div>
 
+        {/* Adresse */}
         <div>
-          <Label htmlFor="address">Adresse *</Label>
-          <Input 
-            id="address" 
-            placeholder="Adresse complète" 
-            required 
-            aria-required="true" 
-            aria-labelledby="address" 
+          <label className="block font-medium mb-1 text-black">Adresse *</label>
+          <input
+            type="text"
+            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            defaultValue="Titreyengöl Mevkii Manavgat Sorgun Yörük"
           />
         </div>
 
+        {/* Website */}
         <div>
-          <Label htmlFor="website">Site web *</Label>
-          <Input 
-            id="website" 
-            placeholder="https://..." 
-            aria-labelledby="website" 
+          <label className="block font-medium mb-1 text-black">Website *</label>
+          <input
+            type="text"
+            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            defaultValue="Quick View"
           />
         </div>
 
+        {/* Email */}
         <div>
-          <Label htmlFor="email">Email *</Label>
-          <Input 
-            id="email" 
-            placeholder="exemple@business.com" 
-            aria-labelledby="email" 
+          <label className="block font-medium mb-1 text-black">Email *</label>
+          <input
+            type="email"
+            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            defaultValue="BusinessName0004@BusinessName.com"
           />
         </div>
 
+        {/* Description */}
         <div>
-          <Label htmlFor="description">Description *</Label>
-          <Textarea 
-            id="description" 
-            rows="4" 
-            placeholder="Décrivez votre business..." 
-            aria-labelledby="description" 
+          <label className="block font-medium mb-1 text-black">Description *</label>
+          <textarea
+            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            rows="4"
+            defaultValue={`This recently opened Voyage Sorgun Hotel is a five stars which means, an exclusive offer for only few hotels per area. With a relaxing pool and spa area, wonderful ambiance in its luxurious garden rooms and villas. It also comes with restaurant, cocktail bar, tennis court and theatre. All that makes it a top destination. It offers direct beach access and a mini club plus a playroom for the younger generation.`}
           />
         </div>
 
-        {/* Boutons d’action */}
-        <div className="flex justify-between mt-6">
-          <Button variant="destructive" aria-label="Rejeter">Rejeter</Button>
-          <Button aria-label="Valider">Valider</Button>
+        {/* Boutons */}
+        <div className="flex justify-between mt-4">
+          <button
+            type="button"
+            className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
+          >
+            Rejeter
+          </button>
+          <button
+            type="submit"
+            className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            Valider
+          </button>
         </div>
       </form>
     </div>
   );
-};
+}
 
 export default AddSubmission;
