@@ -84,12 +84,14 @@ export default function LoginPage() {
             </Link>
           </div>
 
-          <button
-            type="submit"
-            className="w-full bg-[#0f3556] text-white font-semibold py-2 rounded-md hover:bg-[#0d2d49] transition login_button"
-          >
-            Log in
-          </button>
+          <Link to="/admin">
+            <button
+              type="submit"
+              className="w-full bg-[#0f3556] text-white font-semibold py-2 rounded-md hover:bg-[#0d2d49] transition login_button"
+            >
+              Log in
+            </button>
+          </Link>
         </form>
 
         <p className="text-sm text-gray-600 mt-6">
