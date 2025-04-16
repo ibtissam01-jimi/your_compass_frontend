@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Sidebar from "../admin/menuAdmin";
@@ -9,6 +10,18 @@ import EvaluatorsTable from "../admin/users";
 import AddEvaluator from "../admin/AddEvaluator";
 import CategoriesPage from "../admin/categories";
 import AddSubmission from "../admin/addSubmission";
+=======
+import React, { useState } from 'react';
+import Sidebar from '../admin/menuAdmin';
+import Dashboard from '../admin/Dashboard';
+import SubmissionsTable from '../admin/Submissions';
+import Services from '../admin/Services';
+import EvaluatorsTable from '../admin/users';
+import CategoriesPage from '../admin/categories';
+import Guides from '../admin/guides';
+import Cities from '../admin/Cities';
+import Places from '../admin/Places';
+>>>>>>> 86558c48c674618f564a104e83a2e5a9b5752b93
 
 function AdminPage() {
   const [activePage, setActivePage] = useState("dashboard");
@@ -33,9 +46,13 @@ function AdminPage() {
   const isAddService = location.pathname === "/admin/services/ajouter"; // Condition pour l'ajout de service
   const isAddEvaluator = location.pathname === "/admin/evaluators/ajouter"; // Condition pour l'ajout d'évaluateur
 
+
+
+
   return (
     <div className="flex">
       <Sidebar activePage={activePage} setActivePage={setActivePage} />
+<<<<<<< HEAD
       <main className="ml-64 mt-18 p-6 w-full bg-[#f4f1ec] min-h-screen">
         {activePage === "dashboard" && <Dashboard />}
         {activePage === "submission" && (
@@ -58,6 +75,28 @@ function AdminPage() {
           </>
         )}
         {activePage === "categories" && <CategoriesPage />}
+=======
+      <main className="ml-64 mt-20 p-6 w-full bg-[#f4f1ec] min-h-screen">
+        {activePage === 'dashboard' && <Dashboard />}
+        
+        {activePage === 'submission' && <SubmissionsTable />} 
+        {activePage === 'services' && <Services />}
+        {activePage === 'evaluators' && <EvaluatorsTable />}
+        {activePage === 'categories' && <CategoriesPage />}
+        {/* Affiche la page de soumission ici */}
+        {/* Ajoutez d'autres pages ici selon vos besoins */}
+
+        {activePage === 'clients' && <Guides />} 
+        {activePage === 'cities' && <Cities/>} 
+        {activePage === 'places' && <Places/>} 
+
+
+        
+
+
+
+    
+>>>>>>> 86558c48c674618f564a104e83a2e5a9b5752b93
       </main>
     </div>
   );

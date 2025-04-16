@@ -20,11 +20,12 @@ const menuItems = [
   { label: "Dashboard", icon: <HomeIcon className="w-5 h-5" />, key: "dashboard" },
   
   { label: "Submissions", icon: <FileTextIcon className="w-5 h-5" />, key: "submission" },
-  { label: "Services", icon: <ServerIcon className="w-5 h-5" />, key: "services" },
-  { label: "Evaluators", icon: <UsersIcon className="w-5 h-5" />, key: "evaluators" },
+  { label: "Users", icon: <UsersIcon className="w-5 h-5" />, key: "evaluators" },
+  { label: "Cities", icon: <BuildingIcon className="w-5 h-5" />, key: "cities" },
   { label: "Categories", icon: <BriefcaseIcon className="w-5 h-5" />, key: "categories" },
-  { label: "Reviews", icon: <StarIcon className="w-5 h-5" />, key: "reviews" },
-  { label: "Clients", icon: <BuildingIcon className="w-5 h-5" />, key: "clients" },
+  { label: "Services", icon: <ServerIcon className="w-5 h-5" />, key: "services" },
+  { label: "Places", icon: <BuildingIcon className="w-5 h-5" />, key: "places" },
+  { label: "Guides", icon: <BuildingIcon className="w-5 h-5" />, key: "clients" },
   { label: "Settings", icon: <SettingsIcon className="w-5 h-5" />, key: "settings" },
   { label: "Logout", icon: <LogOutIcon className="w-5 h-5" />, key: "logout" },
 ];
