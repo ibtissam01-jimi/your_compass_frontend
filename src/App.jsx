@@ -9,6 +9,7 @@ import ProfileForm from "./components/forms/addGuides";
 import AboutPage from "./components/pages/aboutPage";
 import AdminPage from "./components/pages/adminPage";
 import AddSubmission from "./components/admin/addSubmission";
+import AddGuide from "./components/admin/AddGuide";
 function App() {
   return (
     <Router>
@@ -25,6 +26,7 @@ function App() {
         <Route path="/your-cancel-destination" element={<HomePage/>}/>
         <Route path="/admin" element={<AdminPage/>}/>
         <Route path="//admin/submissions/ajouter" element={<AddSubmission/>}/>
+        <Route path="/addguide" element={<AddGuide/>} />
         
 
       </Routes>

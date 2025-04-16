@@ -5,9 +5,15 @@ import SubmissionsTable from '../admin/Submissions';
 import Services from '../admin/Services';
 import EvaluatorsTable from '../admin/users';
 import CategoriesPage from '../admin/categories';
+import Guides from '../admin/guides';
+import Cities from '../admin/Cities';
+import Places from '../admin/Places';
 
 function App() {
   const [activePage, setActivePage] = useState('dashboard');
+
+
+
 
   return (
     <div className="flex">
@@ -21,6 +27,16 @@ function App() {
         {activePage === 'categories' && <CategoriesPage />}
         {/* Affiche la page de soumission ici */}
         {/* Ajoutez d'autres pages ici selon vos besoins */}
+
+        {activePage === 'clients' && <Guides />} 
+        {activePage === 'cities' && <Cities/>} 
+        {activePage === 'places' && <Places/>} 
+
+
+        
+
+
+
     
       </main>
     </div>

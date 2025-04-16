@@ -8,26 +8,30 @@ const EvaluatorsTable = () => {
     {
       id: 1,
       name: "John Doe",
-      photo: "/images/gui1.jpeg",
+      username:"john01",
       email: "john.doe@example.com",
-      address: "123 Main St, Cityville",
-      phone: "+1234567890",
+      nationality:"Moroccan",
+      birthday:"11-08-1999",
+
+
     },
     {
       id: 2,
       name: "Jane Smith",
-      photo: "/images/gui2.jpeg",
+      username:"jane01",
       email: "jane.smith@example.com",
-      address: "456 Oak St, Townsville",
-      phone: "+9876543210",
+      nationality:"Moroccan",
+      birthday:"11-08-1999",
+     
     },
     {
       id: 3,
       name: "Samuel Green",
-      photo: "/images/gui3.jpeg",
+      username:"samuel01",
       email: "samuel.green@example.com",
-      address: "789 Pine St, Villagetown",
-      phone: "+1122334455",
+      nationality:"Moroccan",
+      birthday:"11-08-1999",
+    
     },
   ]);
 
@@ -46,7 +50,7 @@ const EvaluatorsTable = () => {
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-black font-semibold mb-6">Evaluators</h1>
+      <h1 className="text-black font-semibold mb-6">Users</h1>
 
       {/* Search and Select in the same row */}
       <div className="flex space-x-4 mb-4">
@@ -55,7 +59,7 @@ const EvaluatorsTable = () => {
           <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 text-black" />
           <input
             type="text"
-            placeholder="Search Evaluators"
+            placeholder="Search User"
             className="pl-10 pr-4 py-2 w-full bg-white border border-gray-300 rounded-full shadow-sm text-black focus:outline-none focus:ring-2 focus:ring-[#c5a76f] text-black"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
@@ -71,28 +75,23 @@ const EvaluatorsTable = () => {
         <table className="min-w-full text-left text-sm">
           <thead className="bg-gray-100">
             <tr>
-              <th className="px-4 py-2 font-medium text-black">Photo</th>
               <th className="px-4 py-2 font-medium text-black">Name</th>
+              <th className="px-4 py-2 font-medium text-black">UserName</th>
               <th className="px-4 py-2 font-medium text-black">Email</th>
-              <th className="px-4 py-2 font-medium text-black">Address</th>
-              <th className="px-4 py-2 font-medium text-black">Phone</th>
+              <th className="px-4 py-2 font-medium text-black">Nationality</th>
+              <th className="px-4 py-2 font-medium text-black">Birthday</th>
               <th className="px-4 py-2 font-medium text-black">Actions</th>
             </tr>
           </thead>
           <tbody>
             {filteredEvaluators.map((evaluator) => (
               <tr key={evaluator.id} className="border-t hover:bg-gray-50">
-                <td className="px-4 py-2 text-black">
-                  <img
-                    src={evaluator.photo}
-                    alt={evaluator.name}
-                    className="w-10 h-10 rounded-full"
-                  />
-                </td>
                 <td className="px-4 py-2 text-black">{evaluator.name}</td>
+                <td className="px-4 py-2 text-black">{evaluator.username}</td>
                 <td className="px-4 py-2 text-black">{evaluator.email}</td>
-                <td className="px-4 py-2 text-black">{evaluator.address}</td>
-                <td className="px-4 py-2 text-black">{evaluator.phone}</td>
+                <td className="px-4 py-2 text-black">{evaluator.nationality}</td>
+                <td className="px-4 py-2 text-black">{evaluator.birthday}</td>
+                
                 <td className="px-4 py-2 flex gap-4">
                   <button
                     onClick={() => handleEdit(evaluator.id)}
@@ -123,7 +122,7 @@ const EvaluatorsTable = () => {
       {/* Add Evaluator Button */}
       <div className="mt-4">
         <Button className="bg-[#c5a76f] text-white">
-          Add New Evaluator
+          Add New User
         </Button>
       </div>
     </div>
