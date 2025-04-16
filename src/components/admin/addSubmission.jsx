@@ -1,127 +1,125 @@
-import React from "react";
+import React, { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/Textarea";
+import SubmissionsTable from "./Submissions";
 
-function AddSubmission() {
+export default function AddSubmission() {
+  const [formData, setFormData] = useState({
+    name: "",
+    description: "",
+    address: "",
+    email: "",
+    phone_number: "",
+    category: "",
+    city: "",
+    owner: "",
+    website: "",
+    status: "Pending",
+    date: new Date().toISOString().split("T")[0], // format YYYY-MM-DD
+  });
+
+  const [showTable, setShowTable] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Soumission ajoutée:", formData);
+    // Ici tu peux ajouter un appel à une API ou autre logique
+    setFormData({
+      name: "",
+      description: "",
+      address: "",
+      email: "",
+      phone_number: "",
+      category: "",
+      city: "",
+      owner: "",
+      website: "",
+      status: "Pending",
+      date: new Date().toISOString().split("T")[0],
+    });
+    setShowTable(true);
+  };
+
+  const handleCancel = () => {
+    setShowTable(true);
+  };
+
+  if (showTable) {
+    return <SubmissionsTable />;
+  }
+
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-gray-100 shadow-md rounded-lg space-y-6">
-      {/* Images en haut */}
-      <div className="grid grid-cols-5 gap-2 rounded overflow-hidden">
-        {["pict.png", "pict2.jpg", "merr.png", "sah.jpeg", "tanger.png"].map((src, i) => (
-          <div key={i} className="h-24 w-full">
-            <img
-              src={src}
-              alt={`Preview ${i + 1}`}
-              className="w-full h-full object-cover rounded"
-            />
-          </div>
-        ))}
+    <div className="max-w-3xl mx-auto p-8 bg-[#f4f1ec] rounded-xl shadow-xl space-y-8">
+      <div className="text-center mb-6">
+        <h1 className="text-4xl font-semibold text-[#2d3748] tracking-tight">Ajouter une Soumission</h1>
       </div>
 
-      {/* Formulaire */}
-      <form className="space-y-4">
-        {/* Nom */}
-        <div>
-          <label className="block font-medium mb-1 text-black">Name *</label>
-          <input
-            type="text"
-            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            defaultValue="Voyage Sorgun"
+      <form onSubmit={handleSubmit} className="space-y-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <InputField label="Nom" name="name" value={formData.name} onChange={handleChange} />
+          <InputField label="Catégorie" name="category" value={formData.category} onChange={handleChange} />
+          <InputField label="Ville" name="city" value={formData.city} onChange={handleChange} />
+          <InputField label="Propriétaire" name="owner" value={formData.owner} onChange={handleChange} />
+          <InputField label="Adresse" name="address" value={formData.address} onChange={handleChange} />
+          <InputField label="Email" name="email" type="email" value={formData.email} onChange={handleChange} />
+          <InputField label="Téléphone" name="phone_number" type="tel" value={formData.phone_number} onChange={handleChange} />
+          <InputField label="Site Web" name="website" value={formData.website} onChange={handleChange} />
+        </div>
+
+        <div className="flex flex-col">
+          <label htmlFor="description" className="text-lg font-medium text-[#4a5568]">Description</label>
+          <Textarea
+            id="description"
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            placeholder="Description du service"
+            className="w-full py-4 px-5 mt-2 rounded-lg border-2 border-[#e2e8f0] focus:outline-none focus:ring-2 focus:ring-[#4a90e2] focus:border-[#4a90e2] transition-all text-xl"
           />
         </div>
 
-        {/* Type */}
-        <div>
-          <label className="block font-medium mb-1 text-black">Type *</label>
-          <select className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <option>Hotels</option>
-            <option>Restaurants</option>
-            <option>Rentals</option>
-          </select>
-        </div>
-
-        {/* Pays */}
-        <div>
-          <label className="block font-medium mb-1 text-black">Country *</label>
-          <select className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <option>Turkey</option>
-          </select>
-        </div>
-
-        {/* Ville */}
-        <div>
-          <label className="block font-medium mb-1 text-black">City *</label>
-          <select className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <option>Manavgat</option>
-          </select>
-        </div>
-
-        {/* Téléphone */}
-        <div>
-          <label className="block font-medium mb-1 text-black">Phone Number *</label>
-          <input
-            type="text"
-            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            defaultValue="00 90 242 756 93 00"
-          />
-        </div>
-
-        {/* Adresse */}
-        <div>
-          <label className="block font-medium mb-1 text-black">Adresse *</label>
-          <input
-            type="text"
-            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            defaultValue="Titreyengöl Mevkii Manavgat Sorgun Yörük"
-          />
-        </div>
-
-        {/* Website */}
-        <div>
-          <label className="block font-medium mb-1 text-black">Website *</label>
-          <input
-            type="text"
-            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            defaultValue="Quick View"
-          />
-        </div>
-
-        {/* Email */}
-        <div>
-          <label className="block font-medium mb-1 text-black">Email *</label>
-          <input
-            type="email"
-            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            defaultValue="BusinessName0004@BusinessName.com"
-          />
-        </div>
-
-        {/* Description */}
-        <div>
-          <label className="block font-medium mb-1 text-black">Description *</label>
-          <textarea
-            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            rows="4"
-            defaultValue={`This recently opened Voyage Sorgun Hotel is a five stars which means, an exclusive offer for only few hotels per area. With a relaxing pool and spa area, wonderful ambiance in its luxurious garden rooms and villas. It also comes with restaurant, cocktail bar, tennis court and theatre. All that makes it a top destination. It offers direct beach access and a mini club plus a playroom for the younger generation.`}
-          />
-        </div>
-
-        {/* Boutons */}
-        <div className="flex justify-between mt-4">
-          <button
+        <div className="flex justify-between">
+          <Button
             type="button"
-            className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
+            onClick={handleCancel}
+            className="bg-[#e2e8f0] text-[#4a5568] px-8 py-4 rounded-xl hover:bg-[#d1d5db] transition-all duration-200 text-xl"
           >
-            Rejeter
-          </button>
-          <button
+            Annuler
+          </Button>
+
+          <Button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="bg-[#4a90e2] text-white px-8 py-4 rounded-xl hover:bg-[#357ab7] transition-all duration-200 text-xl"
           >
-            Valider
-          </button>
+            Ajouter Soumission
+          </Button>
         </div>
       </form>
     </div>
   );
 }
 
-export default AddSubmission;
+// Un petit composant pour factoriser les champs
+const InputField = ({ label, name, value, onChange, type = "text" }) => (
+  <div className="flex flex-col">
+    <label htmlFor={name} className="text-lg font-medium text-[#4a5568]">{label}</label>
+    <Input
+      id={name}
+      name={name}
+      value={value}
+      onChange={onChange}
+      type={type}
+      placeholder={label}
+      className="w-full py-4 px-5 mt-2 rounded-lg border-2 border-[#e2e8f0] focus:outline-none focus:ring-2 focus:ring-[#4a90e2] focus:border-[#4a90e2] transition-all text-xl"
+    />
+  </div>
+);

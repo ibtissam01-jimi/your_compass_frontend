@@ -53,8 +53,8 @@ const Dashboard = () => {
     <div className="p-6 space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-semibold text-black">Dashboard</h1>
-        <Button variant="outline">
-          <Filter className="w-4 h-4 mr-2" />
+        <Button variant="outline " className="bg-[#0f3556] text-[#FFFFFF]">
+          <Filter className="w-4 h-4 mr-2   " />
           Filter Période
         </Button>
       </div>
@@ -135,7 +135,7 @@ const Dashboard = () => {
                     <td className="px-4 py-2">{item.owner}</td>
                     <td className="px-4 py-2">{item.date}</td>
                     <td className="px-4 py-2">
-                      <span className={`px-2 py-1 rounded-full text-xs ${statusColor[item.status]}`}>{item.status}</span>
+                      <span className={`px-2 py-1 rounded-full text-xs app_button ${statusColor[item.status]}`}>{item.status}</span>
                     </td>
                   </tr>
                 ))}

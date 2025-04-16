@@ -71,7 +71,7 @@ const Sidebar = ({ setActivePage, activePage }) => {
               className={`flex items-center px-6 py-3 cursor-pointer transition text-sm font-medium ${
                 activePage === item.key
                   ? "bg-[#c5a76f] text-white"
-                  : "text-gray-700 hover:bg-[#c5a76f] hover:text-white"
+                  : "text-gray-700 hover:bg-[#0f3556] hover:text-white"
               }`}
               onClick={() => setActivePage(item.key)}
             >

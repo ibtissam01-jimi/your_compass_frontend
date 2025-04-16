@@ -48,9 +48,9 @@ a {
   color: #ffffff;
   text-decoration: inherit;
 }
-a:hover {
+/* a:hover {
   color: #ffffff;
-}
+} */
 
 
 
@@ -134,6 +134,9 @@ button.login-btn {
   color: #c5a76f !important; 
 }
 
+button.app_button{
+  background-color: rgb(55, 166, 55) !important;
+}
 button.signup-btn {
   background-color: #c5a76f !important;
   color: white !important; 
@@ -144,6 +147,18 @@ button.cancel_buss{
   color: #c5a76f !important; 
 }
 
+button.soumission_button{
+  background-color: #0f3556 !important; 
+  color: #FFFFFF !important; 
+}
+button.services_button{
+  background-color: #0f3556 !important; 
+  color: #FFFFFF !important; 
+}
+.site_web{
+  color: #0f3556 !important; 
+  text-decoration: underline !important; 
+}
 
 @media (prefers-color-scheme: light) {
   :root {

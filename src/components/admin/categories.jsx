@@ -1,16 +1,23 @@
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { FaEdit, FaTrash, FaPlus } from "react-icons/fa";
+import { Card, CardContent } from "@/components/ui/card";
 
 const CategoriesPage = () => {
   const [searchText, setSearchText] = useState("");
-
-  const categories = [
+  const [categories, setCategories] = useState([
     { id: 1, name: "Category 1", description: "Description for Category 1", photo: "/path/to/photo1.jpg" },
     { id: 2, name: "Category 2", description: "Description for Category 2", photo: "/path/to/photo2.jpg" },
     { id: 3, name: "Category 3", description: "Description for Category 3", photo: "/path/to/photo3.jpg" },
-  ];
+  ]);
+
+  const [newCategory, setNewCategory] = useState({
+    name: "",
+    description: "",
+    photo: "",
+  });
+  const [isAddingCategory, setIsAddingCategory] = useState(false);
 
   // Filter categories based on search text
   const filteredCategories = categories.filter((category) => {
@@ -28,64 +35,147 @@ const CategoriesPage = () => {
 
   // Handle delete action
   const handleDelete = (categoryId) => {
+    setCategories(categories.filter((category) => category.id !== categoryId));
     console.log(`Deleting category with ID: ${categoryId}`);
     // Add your delete logic here
   };
 
+  // Handle add new category
+  const handleAddCategory = () => {
+    setCategories([
+      ...categories,
+      {
+        ...newCategory,
+        id: categories.length + 1, // Generate a new ID
+      },
+    ]);
+    setNewCategory({ name: "", description: "", photo: "" });
+    setIsAddingCategory(false);
+  };
+
   return (
-    <div>
-      <h1 className="text-2xl font-semibold mb-6 text-black">Categories</h1>
-
-      <div className="flex flex-wrap gap-2 mb-6 items-center">
-        <Input
-          placeholder="Search categories"
-          className="w-full md:w-1/3 text-black"
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
-        />
-        <Button className="w-full md:w-10">🔍</Button>
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold text-black">Categories</h1>
+        <Button
+          variant="primary"
+          size="sm"
+          onClick={() => setIsAddingCategory(!isAddingCategory)}
+          className="flex items-center gap-2"
+        >
+          <FaPlus /> Add Category
+        </Button>
       </div>
 
-      <div className="bg-white rounded-lg shadow overflow-x-auto">
-        <table className="min-w-full text-left text-sm">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="px-4 py-2 font-medium text-black">Photo</th>
-              <th className="px-4 py-2 font-medium text-black">Name</th>
-              <th className="px-4 py-2 font-medium text-black">Description</th>
-              <th className="px-4 py-2 font-medium text-black">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredCategories.map((category) => (
-              <tr key={category.id} className="border-t hover:bg-gray-50">
-                <td className="px-4 py-2">
-                  <img src={category.photo} alt={category.name} className="w-16 h-16 object-cover" />
-                </td>
-                <td className="px-4 py-2 text-black">{category.name}</td>
-                <td className="px-4 py-2 text-black">{category.description}</td>
-                <td className="px-4 py-2 text-blue-600 cursor-pointer">
-                  <div className="flex space-x-2">
-                    <Button className="mr-2" onClick={() => handleEdit(category.id)}>
-                      <FaEdit />
-                    </Button>
-                    <Button className="bg-red-500 text-white" onClick={() => handleDelete(category.id)}>
-                      <FaTrash />
-                    </Button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-            {filteredCategories.length === 0 && (
-              <tr>
-                <td colSpan="4" className="p-4 text-center text-gray-500">
-                  No categories found.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+      {/* Add Category Form */}
+      {isAddingCategory && (
+        <Card className="shadow-lg rounded-lg mt-4">
+          <CardContent className="p-4">
+            <h2 className="text-xl font-semibold mb-4">Add New Category</h2>
+            <div className="space-y-4">
+              <Input
+                placeholder="Category Name"
+                value={newCategory.name}
+                onChange={(e) => setNewCategory({ ...newCategory, name: e.target.value })}
+                className="w-full"
+              />
+              <Input
+                placeholder="Category Description"
+                value={newCategory.description}
+                onChange={(e) => setNewCategory({ ...newCategory, description: e.target.value })}
+                className="w-full"
+              />
+              <Input
+                placeholder="Photo URL"
+                value={newCategory.photo}
+                onChange={(e) => setNewCategory({ ...newCategory, photo: e.target.value })}
+                className="w-full"
+              />
+              <div className="flex justify-end gap-4">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setIsAddingCategory(false)}
+                  className="text-gray-600"
+                >
+                  Cancel
+                </Button>
+                <Button
+                  variant="primary"
+                  size="sm"
+                  onClick={handleAddCategory}
+                  disabled={!newCategory.name || !newCategory.description || !newCategory.photo}
+                >
+                  Add Category
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      <Card className="shadow-lg rounded-lg mt-4">
+        <CardContent className="p-4">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
+            <Input
+              placeholder="Search categories"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+              className="w-full sm:max-w-sm"
+            />
+          </div>
+
+          {/* Categories Table */}
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-sm text-left border-collapse">
+              <thead className="bg-gray-100 text-gray-600">
+                <tr>
+                  <th className="px-4 py-2">Photo</th>
+                  <th className="px-4 py-2">Name</th>
+                  <th className="px-4 py-2">Description</th>
+                  <th className="px-4 py-2 text-center">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredCategories.map((category) => (
+                  <tr key={category.id} className="border-t hover:bg-gray-50 transition-all">
+                    <td className="px-4 py-2">
+                      <img src={category.photo} alt={category.name} className="w-16 h-16 object-cover" />
+                    </td>
+                    <td className="px-4 py-2">{category.name}</td>
+                    <td className="px-4 py-2">{category.description}</td>
+                    <td className="px-4 py-2 flex justify-center gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="text-blue-600 border-blue-600 hover:bg-blue-100 flex items-center gap-1"
+                        onClick={() => handleEdit(category.id)}
+                      >
+                        <FaEdit />
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="text-red-600 border-red-600 hover:bg-red-100 flex items-center gap-1"
+                        onClick={() => handleDelete(category.id)}
+                      >
+                        <FaTrash />
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+                {filteredCategories.length === 0 && (
+                  <tr>
+                    <td colSpan="4" className="text-center py-6 text-gray-500">
+                      No categories found.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };
