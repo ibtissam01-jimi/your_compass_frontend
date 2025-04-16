@@ -8,7 +8,7 @@ import ResetPassword from "./components/forms/resetPassword";
 import ProfileForm from "./components/forms/addGuides";
 import AboutPage from "./components/pages/aboutPage";
 import AdminPage from "./components/pages/adminPage";
-import AddGuide from "./components/admin/AddGuide"; 
+
 
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
         <Route path="/signup_login" element={<LoginPage/>}/>
         <Route path="/your-cancel-destination" element={<HomePage/>}/>
         <Route path="/admin" element={<AdminPage/>}/>
-        <Route path="/addguide" element={<AddGuide/>} />
+        
         
         
 

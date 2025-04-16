@@ -9,15 +9,17 @@ import EvaluatorsTable from "../admin/users";
 import AddEvaluator from "../admin/AddEvaluator";
 import CategoriesPage from "../admin/categories";
 import AddSubmission from "../admin/addSubmission";
+import AddCategory from "../admin/AddCategoryPage";
 import Guides from '../admin/guides';
-import Cities from '../admin/Cities';
+import CitiesTable from "../admin/Cities";
+import AddCity from "../admin/addCity";
 import Places from '../admin/Places';
+import AddPlace from "../admin/addPlace";
 
 function AdminPage() {
   const [activePage, setActivePage] = useState("dashboard");
   const location = useLocation();
 
-  // Mise à jour de la page active en fonction de l'URL
   useEffect(() => {
     if (location.pathname.startsWith("/admin/submissions")) {
       setActivePage("submission");
@@ -27,14 +29,21 @@ function AdminPage() {
       setActivePage("evaluators");
     } else if (location.pathname.startsWith("/admin/categories")) {
       setActivePage("categories");
+    } else if (location.pathname.startsWith("/admin/cities")) {
+      setActivePage("cities");
+    } else if (location.pathname.startsWith("/admin/places")) {
+      setActivePage("places");
     } else {
       setActivePage("dashboard");
     }
   }, [location.pathname]);
 
   const isAddSubmission = location.pathname === "/admin/submissions/ajouter";
-  const isAddService = location.pathname === "/admin/services/ajouter"; // Condition pour l'ajout de service
-  const isAddEvaluator = location.pathname === "/admin/evaluators/ajouter"; // Condition pour l'ajout d'évaluateur
+  const isAddService = location.pathname === "/admin/services/ajouter"; 
+  const isAddEvaluator = location.pathname === "/admin/evaluators/ajouter"; 
+  const isAddCategory = location.pathname === "/admin/categories/ajouter";
+  const isAddCities = location.pathname === "/admin/cities/ajouter";
+  const isAddPlace = location.pathname === "/admin/places/ajouter"; // This will check if you're adding a new place
 
   return (
     <div className="flex">
@@ -48,22 +57,30 @@ function AdminPage() {
         )}
         {activePage === "services" && (
           <>
-            {isAddService ? <AddService /> : <Services />} {/* Affichage de la liste des services ou du formulaire d'ajout */}
+            {isAddService ? <AddService /> : <Services />}
           </>
         )}
         {activePage === "evaluators" && (
           <>
-            {isAddEvaluator ? (
-              <AddEvaluator setShowForm={setActivePage} />
-            ) : (
-              <EvaluatorsTable />
-            )}
+            {isAddEvaluator ? <AddEvaluator /> : <EvaluatorsTable />}
           </>
         )}
-        {activePage === "categories" && <CategoriesPage />}
-        {activePage === 'clients' && <Guides />} 
-        {activePage === 'cities' && <Cities/>} 
-        {activePage === 'places' && <Places/>} 
+        {activePage === "categories" && (
+          <>
+            {isAddCategory ? <AddCategory /> : <CategoriesPage />}
+          </>
+        )}
+        {activePage === "cities" && (
+          <>
+            {isAddCities ? <AddCity /> : <CitiesTable />}
+          </>
+        )}
+        {activePage === "places" && (
+          <>
+            {isAddPlace ? <AddPlace /> : <Places />}
+          </>
+        )}
+        {activePage === 'clients' && <Guides />}
       </main>
     </div>
   );
