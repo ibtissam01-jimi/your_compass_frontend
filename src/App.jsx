@@ -8,12 +8,8 @@ import ResetPassword from "./components/forms/resetPassword";
 import ProfileForm from "./components/forms/addGuides";
 import AboutPage from "./components/pages/aboutPage";
 import AdminPage from "./components/pages/adminPage";
-<<<<<<< HEAD
+import AddGuide from "./components/admin/AddGuide"; 
 
-=======
-import AddSubmission from "./components/admin/addSubmission";
-import AddGuide from "./components/admin/AddGuide";
->>>>>>> 86558c48c674618f564a104e83a2e5a9b5752b93
 function App() {
   return (
     <Router>
@@ -29,12 +25,8 @@ function App() {
         <Route path="/signup_login" element={<LoginPage/>}/>
         <Route path="/your-cancel-destination" element={<HomePage/>}/>
         <Route path="/admin" element={<AdminPage/>}/>
-<<<<<<< HEAD
-        
-=======
-        <Route path="//admin/submissions/ajouter" element={<AddSubmission/>}/>
         <Route path="/addguide" element={<AddGuide/>} />
->>>>>>> 86558c48c674618f564a104e83a2e5a9b5752b93
+        
         
 
       </Routes>
