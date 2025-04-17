@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import Guides from "./guides";
+import Guides from "./Guides";
 
 export default function AddGuide() {
   const [formData, setFormData] = useState({

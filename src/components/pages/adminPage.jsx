@@ -10,7 +10,7 @@ import AddEvaluator from "../admin/AddEvaluator";
 import CategoriesPage from "../admin/categories";
 import AddSubmission from "../admin/addSubmission";
 import AddCategory from "../admin/AddCategoryPage";
-import Guides from '../admin/guides';
+import Guides from "../admin/Guides";
 import CitiesTable from "../admin/Cities";
 import AddCity from "../admin/addCity";
 import Places from '../admin/Places';
