@@ -221,48 +221,35 @@ const Hotels = () => {
   );
 };
 
-
-
-
-
-
-
-// hadi ila bghina bg tbdl mara bayta mara blru marin , ila ejbatkom 
-// akhren nrjeoum bhal hotel ..
-
-
-
-// const Hotels = () => {
-//   const [backgroundColor, setBackgroundColor] = useState('bg-white');
-
-//   // Change background color every 3 seconds
-//   useEffect(() => {
-//     const interval = setInterval(() => {
-//       setBackgroundColor(prev => (prev === 'bg-white' ? 'bg-[#0F3556]' : 'bg-white'));
-//     }, 3000);
-//     return () => clearInterval(interval); // Clean up interval on component unmount
-//   }, []);
-
-//   return (
-//     <div className={`${backgroundColor} py-10 px-4 sm:px-8 md:px-16 transition-colors duration-150`}>
-//       <h1 className="text-center text-3xl font-bold text-white mb-12">Hôtels à Tanger</h1>
-//       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-//         {hotels.map((hotel, index) => (
-//           <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-xl">
-//             <img src={hotel.image} alt={hotel.name} className="w-full h-56 object-cover" />
-//             <div className="p-6">
-//               <h2 className="text-xl font-semibold text-[#0F3556] mb-2">{hotel.name}</h2>
-//               <p className="text-gray-600 text-sm mb-4"><strong>Adresse:</strong> {hotel.address}</p>
-//               <p className="text-gray-700 text-sm mb-4"><strong>Description:</strong> {hotel.description}</p>
-//               <p className="text-gray-600 text-sm mb-4"><strong>Prix:</strong> {hotel.price}</p>
-//               <p className="text-yellow-500 text-sm mb-4 flex items-center">
-//                 ⭐ {hotel.rating} / 5
-//               </p>
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
 export default Hotels;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
