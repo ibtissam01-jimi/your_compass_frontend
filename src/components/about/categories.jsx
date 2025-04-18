@@ -16,14 +16,6 @@ const [categories,setCategories] = useState([]);
     }
     fetchCategories();
   },[])
-    const data = [
-      { title: "Amazing Views", img: "/images/views.jpg" },
-      { title: "Best Moments", img: "/images/moments.jpg" },
-      { title: "Top Experiences", img: "/images/experiences.jpg" },
-      { title: "Confortable Hotels", img: "/images/hotels.jpg" },
-      { title: "Location Voitures", img: "/images/car-rental.jpg" },
-      { title: "Best Restaurants", img: "/images/restaurants.jpg" },
-    ];
   
     return (
       <div className="py-16 px-4 bg-white">

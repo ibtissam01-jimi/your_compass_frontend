@@ -119,7 +119,7 @@ export default function TourGuides() {
               className="relative min-w-[30%] h-96 rounded-lg overflow-hidden shadow-lg transition-transform transform hover:scale-105"
             >
               <img
-                src={`http://localhost:8000${guide.photo}`} 
+                src={guide.photo} 
                 alt={guide.name}
                 className="w-full h-full object-cover rounded-lg"
               />
