@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import CategoriesPage from "./categories"; // liste des catégories
+import CategoriesPage from "./categories";
 
 export default function AddCategory() {
   const [formData, setFormData] = useState({
@@ -11,6 +11,7 @@ export default function AddCategory() {
   });
 
   const [showTable, setShowTable] = useState(false);
+  const [newCategory, setNewCategory] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,9 +23,15 @@ export default function AddCategory() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Catégorie ajoutée :", formData);
-    // TODO: envoyer formData à l'API ou l'ajouter à un tableau global
 
+    const newCat = {
+      id: Math.floor(Math.random() * 100000), // ID temporaire (tu peux utiliser un backend pour un vrai ID)
+      name: formData.name,
+      description: formData.description,
+      photoURL: "/images/default-category.jpg",
+    };
+
+    setNewCategory(newCat);
     setFormData({ name: "", description: "" });
     setShowTable(true);
   };
@@ -34,7 +41,7 @@ export default function AddCategory() {
   };
 
   if (showTable) {
-    return <CategoriesPage />;
+    return <CategoriesPage newCategory={newCategory} />;
   }
 
   return (

@@ -3,13 +3,16 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Pencil, Trash2 } from "lucide-react";
 import AddService from "./AddService";
+import EditService from "./EditService";
 
 export default function Services() {
   const [searchText, setSearchText] = useState("");
   const [selectedAddress, setSelectedAddress] = useState("");
   const [selectedDescription, setSelectedDescription] = useState("");
   const [showForm, setShowForm] = useState(false);
+  const [editingService, setEditingService] = useState(null);
 
+  // Exemple de données (à remplacer plus tard par des données dynamiques)
   const services = [
     {
       id: 1,
@@ -39,8 +42,23 @@ export default function Services() {
     return matchSearch && matchAddress && matchDescription;
   });
 
+  const handleEditService = (service) => {
+    setEditingService(service);
+    setShowForm(true);
+  };
+
+  const handleDeleteService = (id) => {
+    // À implémenter : logique pour supprimer le service (via API ou state local)
+    console.log("Supprimer le service avec l'id :", id);
+  };
+
+  // Formulaire affiché ?
   if (showForm) {
-    return <AddService setShowForm={setShowForm} />;
+    return editingService ? (
+      <EditService service={editingService} setShowForm={setShowForm} />
+    ) : (
+      <AddService setShowForm={setShowForm} />
+    );
   }
 
   return (
@@ -86,8 +104,11 @@ export default function Services() {
         </div>
 
         <Button
-          className="bg-[#0f3556] text-[#FFFFFF] px-4 py-2 rounded hover:bg-[#b89e65] transition"
-          onClick={() => setShowForm(true)}
+          className="bg-[#0f3556] text-white px-4 py-2 rounded hover:bg-[#b89e65] transition"
+          onClick={() => {
+            setEditingService(null); // Reset edition
+            setShowForm(true);
+          }}
         >
           + Ajouter un service
         </Button>
@@ -116,8 +137,18 @@ export default function Services() {
                     <td className="px-4 py-2 text-black">{service.email}</td>
                     <td className="px-4 py-2 text-black">{service.phone_number}</td>
                     <td className="px-4 py-2 text-black flex gap-3">
-                      <button className="text-white"><Pencil size={18} /></button>
-                      <button className="text-white"><Trash2 size={18} /></button>
+                      <button
+                        className="text-white"
+                        onClick={() => handleEditService(service)}
+                      >
+                        <Pencil size={18} />
+                      </button>
+                      <button
+                        className="text-white"
+                        onClick={() => handleDeleteService(service.id)}
+                      >
+                        <Trash2 size={18} />
+                      </button>
                     </td>
                   </tr>
                 ))

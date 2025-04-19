@@ -15,6 +15,7 @@ import {
   GlobeIcon,
   
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const menuItems = [
   { label: "Dashboard", icon: <HomeIcon className="w-5 h-5" />, key: "dashboard" },
@@ -55,11 +56,13 @@ const Sidebar = ({ setActivePage, activePage }) => {
           </button>
           <GlobeIcon className="text-gray-500 w-5 h-5" />
           <div className="flex items-center gap-2">
-            <img src="/images/admin.png" alt="User" className="w-8 h-8 rounded-full" />
-            <div className="text-sm text-right">
-              <p className="font-medium">L.A.A</p>
-              <p className="text-gray-500 text-xs">admin</p>
-            </div>
+            <Link to="/admin-profile" className="flex items-center gap-2 cursor-pointer">
+              <img src="/images/admin.png" alt="User" className="w-8 h-8 rounded-full" />
+              <div className="text-sm text-right">
+                <p className="font-medium">L.A.A</p>
+                <p className="text-gray-500 text-xs">admin</p>
+              </div>
+            </Link>
           </div>
         </div>
       </div>

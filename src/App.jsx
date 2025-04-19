@@ -8,6 +8,7 @@ import ResetPassword from "./components/forms/resetPassword";
 import ProfileForm from "./components/forms/addGuides";
 import AboutPage from "./components/pages/aboutPage";
 import AdminPage from "./components/pages/adminPage";
+import AdminProfile from "./components/admin/AdminProfile";
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/signup_login" element={<LoginPage/>}/>
         <Route path="/your-cancel-destination" element={<HomePage/>}/>
         <Route path="/admin" element={<AdminPage/>}/>
+        <Route path="/admin-profile" element={<AdminProfile />} />
         
         
         

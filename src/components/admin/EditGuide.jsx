@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import axios from "axios";
 
-export default function EditGuide({ guide, onCancel, onSave }) {
+export default function EditGuide({ guide, onCancel, onSaved }) {
   const [formData, setFormData] = useState({
-    ...guide,
+    name: guide.name || "",
+    email: guide.email || "",
+    address: guide.address || "",
+    city_id: guide.city_id || "",
+    cin: guide.cin || "",
+    phone_number: guide.phone_number || "",
     photo: null,
     CV: null,
   });
@@ -14,26 +20,33 @@ export default function EditGuide({ guide, onCancel, onSave }) {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handlePhotoChange = (e) => {
+  const handleFileChange = (e, type) => {
     const file = e.target.files[0];
-    setFormData((prev) => ({ ...prev, photo: file }));
+    setFormData((prev) => ({ ...prev, [type]: file }));
   };
 
-  const handleCVChange = (e) => {
-    const file = e.target.files[0];
-    setFormData((prev) => ({ ...prev, CV: file }));
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const updatedGuide = {
-      ...formData,
-      photoURL: formData.photo ? URL.createObjectURL(formData.photo) : guide.photo,
-      CVURL: formData.CV ? URL.createObjectURL(formData.CV) : guide.CV,
-    };
+    const data = new FormData();
+    data.append("name", formData.name);
+    data.append("email", formData.email);
+    data.append("address", formData.address);
+    data.append("city_id", formData.city_id);
+    data.append("cin", formData.cin);
+    data.append("phone_number", formData.phone_number);
+    if (formData.photo) data.append("photo", formData.photo);
+    if (formData.CV) data.append("cv", formData.CV);
+    data.append("_method", "PUT");
 
-    onSave(updatedGuide);
+    try {
+      const response = await axios.put(`http://127.0.0.1:8000/guides/${guide.id}`, data, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      onSaved(response.data);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -43,25 +56,25 @@ export default function EditGuide({ guide, onCancel, onSave }) {
         <InputField label="Nom" name="name" value={formData.name} onChange={handleChange} />
         <InputField label="Email" name="email" value={formData.email} onChange={handleChange} />
         <InputField label="Adresse" name="address" value={formData.address} onChange={handleChange} />
-        <InputField label="Ville" name="city" value={formData.city} onChange={handleChange} />
-        <InputField label="CIN" name="CIN" value={formData.CIN} onChange={handleChange} />
-        <InputField label="Téléphone" name="phone" value={formData.phone} onChange={handleChange} />
+        <InputField label="Ville" name="city_id" value={formData.city_id} onChange={handleChange} />
+        <InputField label="CIN" name="cin" value={formData.cin} onChange={handleChange} />
+        <InputField label="Téléphone" name="phone_number" value={formData.phone_number} onChange={handleChange} />
 
         <div className="flex flex-col">
           <label className="text-gray-700 font-medium mb-1">Photo du Guide</label>
-          <input type="file" accept="image/*" onChange={handlePhotoChange} />
+          <input type="file" accept="image/*" onChange={(e) => handleFileChange(e, "photo")} />
           {formData.photo ? (
             <img src={URL.createObjectURL(formData.photo)} alt="Aperçu" className="mt-4 h-40 object-cover rounded" />
-          ) : (
-            <img src={guide.photo} alt="Aperçu" className="mt-4 h-40 object-cover rounded" />
-          )}
+          ) : guide.photo ? (
+            <img src={`/storage/${guide.photo}`} alt="Aperçu" className="mt-4 h-40 object-cover rounded" />
+          ) : null}
         </div>
 
         <div className="flex flex-col">
-          <label className="text-gray-700 font-medium mb-1">CV du Guide</label>
-          <input type="file" accept=".pdf" onChange={handleCVChange} />
-          <div className="mt-4 text-sm text-gray-500">
-            {formData.CV ? `Nouveau CV : ${formData.CV.name}` : `CV actuel : ${guide.CV}`}
+          <label className="text-gray-700 font-medium mb-1">CV du Guide (PDF)</label>
+          <input type="file" accept=".pdf" onChange={(e) => handleFileChange(e, "CV")} />
+          <div className="mt-2 text-sm text-gray-500">
+            {formData.CV ? `Nouveau CV : ${formData.CV.name}` : guide.cv ? `CV actuel : ${guide.cv}` : "Aucun CV"}
           </div>
         </div>
 
@@ -83,7 +96,7 @@ function InputField({ label, name, value, onChange }) {
         name={name}
         value={value}
         onChange={onChange}
-        className="border border-gray-300 rounded-md px-4 py-2"
+        className="border border-gray-300 rounded-md px-4 py-2 text-black"
       />
     </div>
   );

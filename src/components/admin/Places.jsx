@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SearchIcon } from "lucide-react";
 import AddPlace from "./addPlace";  // Assuming correct path for AddPlace component
+import EditPlace from "./EditPlace";  // Import the EditPlace component
 
 const Places = () => {
   const [searchText, setSearchText] = useState("");
@@ -36,6 +37,7 @@ const Places = () => {
       category: "Tourist Place",
     },
   ]);
+  const [selectedPlace, setSelectedPlace] = useState(null); // State to hold selected place for editing
 
   const filteredPlaces = places.filter((place) =>
     place.name.toLowerCase().includes(searchText.toLowerCase())
@@ -45,10 +47,27 @@ const Places = () => {
     setShowForm(true); // Show the form and hide the list
   };
 
+  const handleEditPlace = (place) => {
+    setSelectedPlace(place); // Set the place to be edited
+  };
+
+  const handleSavePlace = (updatedPlace) => {
+    setPlaces(
+      places.map((place) =>
+        place.id === updatedPlace.id ? updatedPlace : place
+      )
+    );
+    setSelectedPlace(null); // Hide the edit form after saving
+  };
+
+  const handleCancelEdit = () => {
+    setSelectedPlace(null); // Cancel editing and hide the form
+  };
+
   return (
     <div className="space-y-4">
       {/* Hide the title when the form is shown */}
-      {!showForm && (
+      {!showForm && !selectedPlace && (
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold text-black">Tourist Places</h1>
           <Button
@@ -63,6 +82,9 @@ const Places = () => {
       {/* If showForm is true, show the AddPlace form */}
       {showForm ? (
         <AddPlace setShowForm={setShowForm} setPlaces={setPlaces} />
+      ) : selectedPlace ? (
+        // If selectedPlace is not null, show the EditPlace form
+        <EditPlace place={selectedPlace} onSave={handleSavePlace} onCancel={handleCancelEdit} />
       ) : (
         // If showForm is false, show the list and search bar
         <div>
@@ -105,7 +127,12 @@ const Places = () => {
                     <td className="px-4 py-2 text-black">{place.city}</td>
                     <td className="px-4 py-2 text-black">{place.category}</td>
                     <td className="px-4 py-2 flex justify-center gap-2 ">
-                      <Button variant="outline" size="sm" className="text-blue-600 border-blue-600 hover:bg-blue-100">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="text-blue-600 border-blue-600 hover:bg-blue-100"
+                        onClick={() => handleEditPlace(place)}
+                      >
                         Edit
                       </Button>
                       <Button variant="outline" size="sm" className="text-red-600 border-red-600 hover:bg-red-100">

@@ -8,11 +8,11 @@ import AddService from "../admin/AddService";
 import EvaluatorsTable from "../admin/users";
 import AddEvaluator from "../admin/AddEvaluator";
 import CategoriesPage from "../admin/categories";
-import AddSubmission from "../admin/addSubmission";
+import AddSubmission from "../admin/AddSubmission";
 import AddCategory from "../admin/AddCategoryPage";
 import Guides from "../admin/Guides";
 import CitiesTable from "../admin/Cities";
-import AddCity from "../admin/addCity";
+import AddCity from "../admin/AddCity";
 import Places from '../admin/Places';
 import AddPlace from "../admin/addPlace";
 
@@ -43,7 +43,7 @@ function AdminPage() {
   const isAddEvaluator = location.pathname === "/admin/evaluators/ajouter"; 
   const isAddCategory = location.pathname === "/admin/categories/ajouter";
   const isAddCities = location.pathname === "/admin/cities/ajouter";
-  const isAddPlace = location.pathname === "/admin/places/ajouter"; // This will check if you're adding a new place
+  const isAddPlace = location.pathname === "/admin/places/ajouter"; 
 
   return (
     <div className="flex">

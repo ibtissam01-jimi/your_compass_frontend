@@ -18,7 +18,7 @@ const Guides = () => {
 
   const fetchGuides = async () => {
     try {
-      const response = await axios.get("/api/guides");
+      const response = await axios.get("http://localhost:8000/guides");
       setGuides(response.data.guides);
     } catch (error) {
       console.error("Error fetching guides:", error);
@@ -137,10 +137,10 @@ const Guides = () => {
                         <td className="px-4 py-2 text-black">{guide.phone_number}</td>
                         <td className="px-4 py-2 flex gap-3">
                           <button onClick={() => handleEdit(guide)} title="Edit">
-                            <FaEdit className="text-blue-500" />
+                            <FaEdit className="text-white" />
                           </button>
                           <button onClick={() => handleDelete(guide.id)} title="Delete">
-                            <FaTrashAlt className="text-red-500" />
+                            <FaTrashAlt className="text-white" />
                           </button>
                         </td>
                       </tr>
