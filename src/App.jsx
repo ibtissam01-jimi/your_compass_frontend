@@ -7,7 +7,14 @@ import SignUp from "./components/forms/signin";
 import ResetPassword from "./components/forms/resetPassword";
 import ProfileForm from "./components/forms/addGuides";
 import AboutPage from "./components/pages/aboutPage";
+<<<<<<< HEAD
 import Sidebar from "./components/admin/menuAdmin";
+=======
+import AdminPage from "./components/pages/adminPage";
+import AdminProfile from "./components/admin/AdminProfile";
+
+
+>>>>>>> main
 function App() {
   return (
     <Router>
@@ -22,7 +29,16 @@ function App() {
         <Route path="/create_signup" element={<SignUp/>}/>
         <Route path="/signup_login" element={<LoginPage/>}/>
         <Route path="/your-cancel-destination" element={<HomePage/>}/>
+<<<<<<< HEAD
         <Route path="/admin" element={<Sidebar/>}/>
+=======
+        <Route path="/admin" element={<AdminPage/>}/>
+        <Route path="/admin-profile" element={<AdminProfile />} />
+        
+        
+        
+
+>>>>>>> main
       </Routes>
       
     </Router>
