@@ -135,8 +135,8 @@ export default function LoginPage() {
     try {
       const response = await axios.post(BACKEND_URL, data);
       if (response.status === 200) {
+        localStorage.setItem('token',response.data.Authorization.token)
         alert("logged in");
-        console.log(response.data.Authorization.token);
         navigate("/");
       }
     } catch (error) {
