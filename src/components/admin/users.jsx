@@ -181,7 +181,7 @@ const EvaluatorsTable = () => {
 
   const fetchEvaluators = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/users");
+      const response = await axios.get("http://localhost:8000/evaluators");
       setEvaluators(response.data);
     } catch (error) {
       console.error("Erreur lors de la récupération des évaluateurs :", error);
@@ -189,13 +189,20 @@ const EvaluatorsTable = () => {
   };
 
   const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this evaluator?")) return;
+  
     try {
-      await axios.delete(`/api/evaluators/${id}`);
+      const response =await axios.delete(`http://localhost:8000/api/evaluators/${id}`);
+
+
+      console.log("Deleted successfully", response.data);
+  
       setEvaluators((prev) => prev.filter((e) => e.id !== id));
     } catch (error) {
-      console.error("Erreur lors de la suppression :", error);
+      console.error("Erreur lors de la suppression :", error.response?.data || error.message);
     }
   };
+  
 
   const handleEdit = (id) => {
     console.log("Édition de l'évaluateur avec l'ID :", id);
@@ -296,3 +303,4 @@ const EvaluatorsTable = () => {
 };
 
 export default EvaluatorsTable;
+
