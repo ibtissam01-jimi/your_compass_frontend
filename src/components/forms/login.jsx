@@ -16,20 +16,20 @@ export default function LoginPage() {
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(BACKEND_URL, data);
-      
+
       if (response.status === 200) {
-        // Successfully logged in, handle the token and role check
+        // Stocker le token
         const token = response.data.Authorization.token;
         const user = response.data.user;
 
-        // Store token in localStorage or any other place if needed
-        localStorage.setItem('token', token);
+        localStorage.setItem("token", token);
+        alert("Logged in");
 
-        // Check the role and navigate accordingly
-        if (user.role === 'admin') {
-          navigate("/admin"); // Redirect to the admin page if user is an admin
+        // Redirection selon le rôle
+        if (user.role === "admin") {
+          navigate("/admin");
         } else {
-          navigate("/"); // Otherwise, redirect to home page or user dashboard
+          navigate("/");
         }
       }
     } catch (error) {
@@ -95,23 +95,12 @@ export default function LoginPage() {
             </Link>
           </div>
 
-<<<<<<< HEAD
-          <Link to="/admin">
-            <button
-              type="submit"
-              className="w-full bg-[#0f3556] text-white font-semibold py-2 rounded-md hover:bg-[#0d2d49] transition login_button"
-            >
-              Log in
-            </button>
-          </Link>
-=======
           <button
             type="submit"
             className="w-full bg-[#0f3556] text-white py-2 rounded-lg font-semibold hover:bg-[#0d2d49] transition"
           >
             Log in
           </button>
->>>>>>> main
         </form>
 
         <p className="text-sm text-gray-600 mt-6 text-center">

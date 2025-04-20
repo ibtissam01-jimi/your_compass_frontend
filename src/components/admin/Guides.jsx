@@ -3,13 +3,13 @@ import { Button } from "@/components/ui/button";
 import { SearchIcon } from "lucide-react";
 import axios from "axios";
 import AddGuide from "./AddGuide";
-import EditGuide from "./EditGuide";  // Ensure EditGuide is imported
+import EditGuide from "./EditGuide"; // Ensure EditGuide is imported
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 
 const Guides = () => {
   const [searchText, setSearchText] = useState("");
   const [showForm, setShowForm] = useState(false);
-  const [editingGuide, setEditingGuide] = useState(null); // Store the guide to be edited
+  const [editingGuide, setEditingGuide] = useState(null);
   const [guides, setGuides] = useState([]);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const Guides = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`/api/guides/${id}`);
+      await axios.delete(`http://localhost:8000/api/guides/${id}`);
       setGuides((prev) => prev.filter((g) => g.id !== id));
     } catch (error) {
       console.error("Error deleting guide:", error);
@@ -35,23 +35,23 @@ const Guides = () => {
   };
 
   const handleEdit = (guide) => {
-    setEditingGuide(guide);  // Set the guide to be edited
+    setEditingGuide(guide);
   };
 
   const handleSaveEdit = async (updatedGuide) => {
     try {
-      await axios.put(`/api/guides/${updatedGuide.id}`, updatedGuide);  // Send the updated guide to the backend
+      await axios.put(`http://localhost:8000/api/guides/${updatedGuide.id}`, updatedGuide);
       setGuides((prev) =>
         prev.map((guide) => (guide.id === updatedGuide.id ? updatedGuide : guide))
       );
-      setEditingGuide(null); // Clear the edit form
+      setEditingGuide(null);
     } catch (error) {
       console.error("Error saving the edited guide:", error);
     }
   };
 
   const handleCancelEdit = () => {
-    setEditingGuide(null);  // Clear the edit form
+    setEditingGuide(null);
   };
 
   const addGuide = (newGuide) => {

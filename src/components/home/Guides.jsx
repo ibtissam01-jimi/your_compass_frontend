@@ -51,17 +51,6 @@
 // export default TourGuides;
 
 
-
-
-
-
-
-
-
-
-
-
-
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -75,9 +64,9 @@ export default function TourGuides() {
   useEffect(() => {
     axios.get("http://localhost:8000/guides")
       .then(response => {
-        console.log("Réponse reçue :", response.data); // Pour debug
-        if (Array.isArray(response.data)) {
-          setGuides(response.data);
+        console.log("Guide Response :", response.data); // Pour debug
+        if (Array.isArray(response.data.guides)) {
+          setGuides(response.data.guides);
         } else {
           console.error("La réponse n'est pas un tableau :", response.data);
           setGuides([]); // pour éviter les erreurs si ce n'est pas un tableau
@@ -130,7 +119,7 @@ export default function TourGuides() {
               className="relative min-w-[30%] h-96 rounded-lg overflow-hidden shadow-lg transition-transform transform hover:scale-105"
             >
               <img
-                src={`http://localhost:8000${guide.photo}`} // Exemple : /images/guides/gui1.jpg
+                src={guide.photo} 
                 alt={guide.name}
                 className="w-full h-full object-cover rounded-lg"
               />

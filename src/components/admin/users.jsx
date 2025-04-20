@@ -160,8 +160,6 @@
 
 
 
-
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
@@ -182,7 +180,7 @@ const EvaluatorsTable = () => {
 
   const fetchEvaluators = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/users");
+      const response = await axios.get("http://localhost:8000/api/evaluators");
       setEvaluators(response.data);
     } catch (error) {
       console.error("Erreur lors de la récupération des évaluateurs :", error);
@@ -190,11 +188,14 @@ const EvaluatorsTable = () => {
   };
 
   const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this evaluator?")) return;
+
     try {
-      await axios.delete(`http://localhost:8000/users/${id}`);
+      const response = await axios.delete(`http://localhost:8000/api/evaluators/${id}`);
+      console.log("Deleted successfully", response.data);
       setEvaluators((prev) => prev.filter((e) => e.id !== id));
     } catch (error) {
-      console.error("Erreur lors de la suppression :", error);
+      console.error("Erreur lors de la suppression :", error.response?.data || error.message);
     }
   };
 
@@ -277,10 +278,10 @@ const EvaluatorsTable = () => {
                         <td className="px-4 py-2 text-black">{evaluator.birth_date}</td>
                         <td className="px-4 py-2 text-black flex gap-3">
                           <button onClick={() => handleEdit(evaluator)} title="Edit">
-                            <FaEdit className="text-white" />
+                            <FaEdit className="text-[#0f3556]" />
                           </button>
                           <button onClick={() => handleDelete(evaluator.id)} title="Delete">
-                            <FaTrashAlt className="text-white" />
+                            <FaTrashAlt className="text-red-600" />
                           </button>
                         </td>
                       </tr>
@@ -315,3 +316,4 @@ const EvaluatorsTable = () => {
 };
 
 export default EvaluatorsTable;
+
