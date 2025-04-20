@@ -148,43 +148,43 @@
 
 
 
-
-
 import React, { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import axios from "axios";
-import AddCategory from "./AddCategoryPage"; // Assure-toi d'importer le formulaire
+import AddCategory from "./AddCategoryPage";
+import EditCategory from "./EditCategory";
 
 const CategoriesPage = () => {
   const [searchText, setSearchText] = useState("");
   const [categories, setCategories] = useState([]);
-  const [showForm, setShowForm] = useState(false); // Pour afficher/masquer le formulaire
+  const [isEditing, setIsEditing] = useState(false);
+  const [editCategoryId, setEditCategoryId] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await axios.get("http://localhost:8000/categories");
-        const loadedCategories = response.data.map((category) => ({
-          id: category.id,
-          name: category.name,
-          description: category.description,
-          photoURL: category.image
-            ? `http://localhost:8000${category.image}`
-            : "/images/default-category.jpg",
-        }));
-
-        setCategories(loadedCategories);
-      } catch (error) {
-        console.error("Erreur lors du chargement des catégories :", error);
-      }
-    };
-
     fetchCategories();
   }, []);
 
-  // 👉 Fonction de suppression
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/categories");
+      const loadedCategories = response.data.map((category) => ({
+        id: category.id,
+        name: category.name,
+        description: category.description,
+        photoURL: category.image
+          ? `http://localhost:8000${category.image}`
+          : "/images/default-category.jpg",
+      }));
+      setCategories(loadedCategories);
+    } catch (error) {
+      console.error("Erreur lors du chargement des catégories :", error);
+    }
+  };
+
   const handleDeleteCategory = async (id) => {
     if (window.confirm("Voulez-vous vraiment supprimer cette catégorie ?")) {
       try {
@@ -196,7 +196,34 @@ const CategoriesPage = () => {
     }
   };
 
-  // 🧩 Filtrer les catégories
+  const handleEditClick = (categoryId) => {
+    const category = categories.find((cat) => cat.id === categoryId);
+    setSelectedCategory(category);
+    setEditCategoryId(categoryId);
+    setIsEditing(true);
+    setShowForm(true);
+  };
+
+  const handleCancelEdit = () => {
+    setSelectedCategory(null);
+    setEditCategoryId(null);
+    setIsEditing(false);
+    setShowForm(false);
+  };
+
+  const handleSaveCategory = (updatedCategory) => {
+    const updatedCategories = categories.map((category) =>
+      category.id === updatedCategory.id ? updatedCategory : category
+    );
+    setCategories(updatedCategories);
+    handleCancelEdit();
+  };
+
+  const handleAddCategorySuccess = () => {
+    fetchCategories();
+    setShowForm(false);
+  };
+
   const filteredCategories = categories.filter((category) =>
     category.name.toLowerCase().includes(searchText.toLowerCase())
   );
@@ -206,7 +233,10 @@ const CategoriesPage = () => {
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold text-black">Catégories</h1>
         <Button
-          onClick={() => setShowForm(!showForm)}
+          onClick={() => {
+            setShowForm(!showForm);
+            if (isEditing) handleCancelEdit();
+          }}
           variant="primary"
           size="sm"
           className="bg-[#0f3556] text-white hover:bg-[#b89e65] transition"
@@ -217,7 +247,15 @@ const CategoriesPage = () => {
 
       {showForm && (
         <div className="my-4">
-          <AddCategory onCategoryAdded={() => setShowForm(false)} />
+          {isEditing && selectedCategory ? (
+            <EditCategory
+              category={selectedCategory}
+              onSave={handleSaveCategory}
+              onCancel={handleCancelEdit}
+            />
+          ) : (
+            <AddCategory onCategoryAdded={handleAddCategorySuccess} />
+          )}
         </div>
       )}
 
@@ -258,7 +296,13 @@ const CategoriesPage = () => {
                     <td className="px-4 py-2">{category.name}</td>
                     <td className="px-4 py-2">{category.description}</td>
                     <td className="px-4 py-2 flex justify-center gap-2">
-                      <Button variant="outline" size="sm">Edit</Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleEditClick(category.id)}
+                      >
+                        Edit
+                      </Button>
                       <Button
                         variant="outline"
                         size="sm"
@@ -287,3 +331,4 @@ const CategoriesPage = () => {
 };
 
 export default CategoriesPage;
+

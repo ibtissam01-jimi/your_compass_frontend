@@ -112,12 +112,6 @@
 
 
 
-
-
-
-
-
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Input } from "@/components/ui/input";
@@ -267,3 +261,4 @@ const TextareaField = ({ label, name, value, onChange }) => (
 );
 
 export default AddCategory;
+

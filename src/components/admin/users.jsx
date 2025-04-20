@@ -160,28 +160,27 @@
 
 
 
-
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { SearchIcon } from "lucide-react";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import AddEvaluator from "./AddEvaluator";
+import EditEvaluator from "./EditEvaluator";
 
 const EvaluatorsTable = () => {
   const [searchText, setSearchText] = useState("");
   const [evaluators, setEvaluators] = useState([]);
   const [showForm, setShowForm] = useState(false);
+  const [editingEvaluator, setEditingEvaluator] = useState(null);
 
-  // Récupérer les évaluateurs à partir de l'API
   useEffect(() => {
     fetchEvaluators();
   }, []);
 
   const fetchEvaluators = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/evaluators");
+      const response = await axios.get("http://localhost:8000/api/evaluators");
       setEvaluators(response.data);
     } catch (error) {
       console.error("Erreur lors de la récupération des évaluateurs :", error);
@@ -190,26 +189,30 @@ const EvaluatorsTable = () => {
 
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this evaluator?")) return;
-  
+
     try {
-      const response =await axios.delete(`http://localhost:8000/api/evaluators/${id}`);
-
-
+      const response = await axios.delete(`http://localhost:8000/api/evaluators/${id}`);
       console.log("Deleted successfully", response.data);
-  
       setEvaluators((prev) => prev.filter((e) => e.id !== id));
     } catch (error) {
       console.error("Erreur lors de la suppression :", error.response?.data || error.message);
     }
   };
-  
 
-  const handleEdit = (id) => {
-    console.log("Édition de l'évaluateur avec l'ID :", id);
+  const handleEdit = (evaluator) => {
+    setEditingEvaluator(evaluator);
+  };
+
+  const handleUpdateEvaluator = (updatedEvaluator) => {
+    setEvaluators((prev) =>
+      prev.map((e) => (e.id === updatedEvaluator.id ? updatedEvaluator : e))
+    );
+    setEditingEvaluator(null);
   };
 
   const addEvaluator = (newEvaluator) => {
     setEvaluators((prev) => [...prev, newEvaluator]);
+    setShowForm(false);
   };
 
   const filteredEvaluators = evaluators.filter((evaluator) =>
@@ -221,7 +224,7 @@ const EvaluatorsTable = () => {
 
   return (
     <div className="space-y-4">
-      {!showForm && (
+      {!showForm && !editingEvaluator && (
         <>
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-semibold text-black">Evaluators</h1>
@@ -274,11 +277,11 @@ const EvaluatorsTable = () => {
                         <td className="px-4 py-2 text-black">{evaluator.nationality}</td>
                         <td className="px-4 py-2 text-black">{evaluator.birth_date}</td>
                         <td className="px-4 py-2 text-black flex gap-3">
-                          <button onClick={() => handleEdit(evaluator.id)} title="Edit">
-                            <FaEdit className="text-blue-500" />
+                          <button onClick={() => handleEdit(evaluator)} title="Edit">
+                            <FaEdit className="text-[#0f3556]" />
                           </button>
                           <button onClick={() => handleDelete(evaluator.id)} title="Delete">
-                            <FaTrashAlt className="text-red-500" />
+                            <FaTrashAlt className="text-red-600" />
                           </button>
                         </td>
                       </tr>
@@ -297,7 +300,17 @@ const EvaluatorsTable = () => {
         </>
       )}
 
-      {showForm && <AddEvaluator setShowForm={setShowForm} addEvaluator={addEvaluator} />}
+      {showForm && (
+        <AddEvaluator setShowForm={setShowForm} addEvaluator={addEvaluator} />
+      )}
+
+      {editingEvaluator && (
+        <EditEvaluator
+          evaluator={editingEvaluator}
+          onCancel={() => setEditingEvaluator(null)}
+          onUpdate={handleUpdateEvaluator}
+        />
+      )}
     </div>
   );
 };
