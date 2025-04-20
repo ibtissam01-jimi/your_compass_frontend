@@ -1,16 +1,15 @@
-
-
-
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { SearchIcon } from "lucide-react";
 import axios from "axios";
 import AddGuide from "./AddGuide";
+import EditGuide from "./EditGuide"; // Ensure EditGuide is imported
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 
 const Guides = () => {
   const [searchText, setSearchText] = useState("");
   const [showForm, setShowForm] = useState(false);
+  const [editingGuide, setEditingGuide] = useState(null);
   const [guides, setGuides] = useState([]);
 
   useEffect(() => {
@@ -22,7 +21,7 @@ const Guides = () => {
       const response = await axios.get("http://localhost:8000/guides");
       setGuides(response.data.guides);
     } catch (error) {
-      console.error("Erreur lors de la récupération des guides :", error);
+      console.error("Error fetching guides:", error);
     }
   };
 
@@ -31,14 +30,28 @@ const Guides = () => {
       await axios.delete(`http://localhost:8000/api/guides/${id}`);
       setGuides((prev) => prev.filter((g) => g.id !== id));
     } catch (error) {
-      console.error("Erreur lors de la suppression du guide :", error);
+      console.error("Error deleting guide:", error);
     }
   };
-  
 
-  const handleEdit = (id) => {
-    console.log("Édition du guide avec l'ID :", id);
-    // Tu peux ajouter ici la redirection vers une page d’édition
+  const handleEdit = (guide) => {
+    setEditingGuide(guide);
+  };
+
+  const handleSaveEdit = async (updatedGuide) => {
+    try {
+      await axios.put(`http://localhost:8000/api/guides/${updatedGuide.id}`, updatedGuide);
+      setGuides((prev) =>
+        prev.map((guide) => (guide.id === updatedGuide.id ? updatedGuide : guide))
+      );
+      setEditingGuide(null);
+    } catch (error) {
+      console.error("Error saving the edited guide:", error);
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setEditingGuide(null);
   };
 
   const addGuide = (newGuide) => {
@@ -51,7 +64,7 @@ const Guides = () => {
 
   return (
     <div className="space-y-4">
-      {!showForm && (
+      {!showForm && !editingGuide && (
         <>
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-semibold text-black">Guides</h1>
@@ -109,9 +122,8 @@ const Guides = () => {
                         <td className="px-4 py-2 text-black">{guide.name}</td>
                         <td className="px-4 py-2 text-black">{guide.email}</td>
                         <td className="px-4 py-2 text-black">{guide.address}</td>
-                        <td className="px-4 py-2 text-black">{guide.city_id}</td>
+                        <td className="px-4 py-2 text-black">{guide.city}</td>
                         <td className="px-4 py-2 text-black">{guide.cin}</td>
-                    
                         <td className="px-4 py-2 text-black">
                           <a
                             href={guide.cv}
@@ -124,11 +136,11 @@ const Guides = () => {
                         </td>
                         <td className="px-4 py-2 text-black">{guide.phone_number}</td>
                         <td className="px-4 py-2 flex gap-3">
-                          <button onClick={() => handleEdit(guide.id)} title="Edit">
-                            <FaEdit className="text-blue-500" />
+                          <button onClick={() => handleEdit(guide)} title="Edit">
+                            <FaEdit className="text-white" />
                           </button>
                           <button onClick={() => handleDelete(guide.id)} title="Delete">
-                            <FaTrashAlt className="text-red-500" />
+                            <FaTrashAlt className="text-white" />
                           </button>
                         </td>
                       </tr>
@@ -148,6 +160,14 @@ const Guides = () => {
       )}
 
       {showForm && <AddGuide setShowForm={setShowForm} addGuide={addGuide} />}
+      
+      {editingGuide && (
+        <EditGuide
+          guide={editingGuide}
+          onSave={handleSaveEdit}
+          onCancel={handleCancelEdit}
+        />
+      )}
     </div>
   );
 };

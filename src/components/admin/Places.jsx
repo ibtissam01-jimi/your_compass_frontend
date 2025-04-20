@@ -1,30 +1,25 @@
-
-
-
-
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { SearchIcon } from "lucide-react";
-import AddPlace from "./addPlace";
+import AddPlace from "./AddPlace";
+import EditPlace from "./EditPlace";
 
 const Places = () => {
   const [searchText, setSearchText] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [places, setPlaces] = useState([]);
+  const [selectedPlace, setSelectedPlace] = useState(null);
 
+  // Charger les données des places
   useEffect(() => {
-    // Appel API pour récupérer les places (services avec category_id = 4)
-    axios.get("http://localhost:8000/places") // Ajuste le lien si nécessaire
+    axios.get("http://localhost:8000/places")
       .then((response) => {
-        // Mapping pour correspondre à la structure de tes données affichées
         const formattedPlaces = response.data.map((place) => ({
           id: place.id,
           name: place.name,
           description: place.description,
-          image: place.image , // au cas où l'image n'est pas définie
+          image: place.image,
           city: place.city?.name,
           localisation: place.address,
           category: place.category?.name,
@@ -38,6 +33,7 @@ const Places = () => {
       });
   }, []);
 
+  // Filtrer selon le texte
   const filteredPlaces = places.filter((place) =>
     place.name.toLowerCase().includes(searchText.toLowerCase())
   );
@@ -46,23 +42,37 @@ const Places = () => {
     setShowForm(true);
   };
 
+  const handleEditPlace = (place) => {
+    setSelectedPlace(place);
+  };
+
+  const handleSavePlace = (updatedPlace) => {
+    setPlaces(
+      places.map((place) =>
+        place.id === updatedPlace.id ? updatedPlace : place
+      )
+    );
+    setSelectedPlace(null);
+  };
+
+  const handleCancelEdit = () => {
+    setSelectedPlace(null);
+  };
 
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this place?")) {
       try {
         await axios.delete(`http://localhost:8000/api/services/${id}`);
-        // Mise à jour locale de la liste des places
         setPlaces((prevPlaces) => prevPlaces.filter((place) => place.id !== id));
       } catch (error) {
         console.error("Erreur lors de la suppression :", error);
       }
     }
   };
-  
 
   return (
     <div className="space-y-4">
-      {!showForm && (
+      {!showForm && !selectedPlace && (
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold text-black">Tourist Places</h1>
           <Button
@@ -76,6 +86,12 @@ const Places = () => {
 
       {showForm ? (
         <AddPlace setShowForm={setShowForm} setPlaces={setPlaces} />
+      ) : selectedPlace ? (
+        <EditPlace
+          place={selectedPlace}
+          onSave={handleSavePlace}
+          onCancel={handleCancelEdit}
+        />
       ) : (
         <div>
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
@@ -107,7 +123,7 @@ const Places = () => {
                       <img
                         src={`http://localhost:8000${place.image}`}
                         alt={place.name}
-                        className="w-10 h-10 rounded-full"
+                        className="w-10 h-10 rounded-full object-cover"
                       />
                     </td>
                     <td className="px-4 py-2 text-black">{place.name}</td>
@@ -116,18 +132,22 @@ const Places = () => {
                     <td className="px-4 py-2 text-black">{place.city}</td>
                     <td className="px-4 py-2 text-black">{place.category}</td>
                     <td className="px-4 py-2 flex justify-center gap-2">
-                      <Button variant="outline" size="sm" className="text-blue-600 border-blue-600 hover:bg-blue-100">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="text-blue-600 border-blue-600 hover:bg-blue-100"
+                        onClick={() => handleEditPlace(place)}
+                      >
                         Edit
                       </Button>
                       <Button
-  variant="outline"
-  size="sm"
-  className="text-red-600 border-red-600 hover:bg-red-100"
-  onClick={() => handleDelete(place.id)}
->
-  Delete
-</Button>
-
+                        variant="outline"
+                        size="sm"
+                        className="text-red-600 border-red-600 hover:bg-red-100"
+                        onClick={() => handleDelete(place.id)}
+                      >
+                        Delete
+                      </Button>
                     </td>
                   </tr>
                 ))}
@@ -148,4 +168,3 @@ const Places = () => {
 };
 
 export default Places;
-

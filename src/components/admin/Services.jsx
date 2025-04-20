@@ -142,13 +142,13 @@
 // }
 
 
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Pencil, Trash2 } from "lucide-react";
 import AddService from "./AddService";
+import EditService from "./EditService";
 
 export default function Services() {
   const [services, setServices] = useState([]);
@@ -156,8 +156,8 @@ export default function Services() {
   const [selectedAddress, setSelectedAddress] = useState("");
   const [selectedDescription, setSelectedDescription] = useState("");
   const [showForm, setShowForm] = useState(false);
+  const [editingService, setEditingService] = useState(null);
 
-  // Charger les services au montage
   useEffect(() => {
     fetchServices();
   }, []);
@@ -168,7 +168,7 @@ export default function Services() {
       .catch((error) => console.error("Erreur de chargement des services :", error));
   };
 
-  const handleDelete = (id) => {
+  const handleDeleteService = (id) => {
     if (window.confirm("Voulez-vous vraiment supprimer ce service ?")) {
       axios.delete(`http://localhost:8000/api/services/${id}`)
         .then(() => {
@@ -190,8 +190,17 @@ export default function Services() {
     return matchSearch && matchAddress && matchDescription;
   });
 
+  const handleEditService = (service) => {
+    setEditingService(service);
+    setShowForm(true);
+  };
+
   if (showForm) {
-    return <AddService setShowForm={setShowForm} />;
+    return editingService ? (
+      <EditService service={editingService} setShowForm={setShowForm} />
+    ) : (
+      <AddService setShowForm={setShowForm} />
+    );
   }
 
   return (
@@ -233,8 +242,11 @@ export default function Services() {
         </div>
 
         <Button
-          className="bg-[#0f3556] text-[#FFFFFF] px-4 py-2 rounded hover:bg-[#b89e65] transition"
-          onClick={() => setShowForm(true)}
+          className="bg-[#0f3556] text-white px-4 py-2 rounded hover:bg-[#b89e65] transition"
+          onClick={() => {
+            setEditingService(null); // Reset edition
+            setShowForm(true);
+          }}
         >
           + Ajouter un service
         </Button>
@@ -279,11 +291,15 @@ export default function Services() {
                     <td className="px-4 py-2 text-black">{service.city?.name}</td>
                     <td className="px-4 py-2 text-black">{service.category?.name}</td>
                     <td className="px-4 py-2 text-black flex gap-3">
-                      <button className="text-white" title="Éditer">
+                      <button
+                        className="text-white"
+                        onClick={() => handleEditService(service)}
+                        title="Éditer"
+                      >
                         <Pencil size={18} />
                       </button>
                       <button
-                        onClick={() => handleDelete(service.id)}
+                        onClick={() => handleDeleteService(service.id)}
                         className="text-white"
                         title="Supprimer"
                       >
