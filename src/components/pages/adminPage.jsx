@@ -1,18 +1,3 @@
-<<<<<<< HEAD
-import React from "react";
-import Sidebar from "../admin/menuAdmin";
-
-function AboutPage() {
-    return (
-        <div className="w-full min-h-screen">
-            <Sidebar />
-            
-        </div>
-    );
-}
-
-export default AboutPage;
-=======
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Sidebar from "../admin/menuAdmin";
@@ -102,4 +87,3 @@ function AdminPage() {
 }
 
 export default AdminPage;
->>>>>>> main
