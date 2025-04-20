@@ -9,7 +9,7 @@ export default function Navbar() {
   const menuItems = [
     { label: "HOME", link: "/" },
     { label: "ABOUT US", link: "/about" },
-    { label: "SERVICE", link: "#service" },
+    { label: "FAVORITE", link: "/favorites" },
     { label: "CITIES", link: "#cities", hasDropdown: true },  // Mark 'Cities' with dropdown
     { label: "CONTACT", link: "#contact" },
   ];

@@ -16,20 +16,18 @@ export default function LoginPage() {
   const onSubmit = async (data) => {
     try {
       const response = await axios.post(BACKEND_URL, data);
-      
+
       if (response.status === 200) {
-        // Successfully logged in, handle the token and role check
         const token = response.data.Authorization.token;
-        const user = response.data.user;
+        const user = response.data.user; // Use user for both admin and regular user
 
-        // Store token in localStorage or any other place if needed
-        localStorage.setItem('token', token);
+        localStorage.setItem("token", token);
 
-        // Check the role and navigate accordingly
-        if (user.role === 'admin') {
-          navigate("/admin"); // Redirect to the admin page if user is an admin
+        // Redirect to the admin page if it's an admin
+        if (user.is_admin) {
+          navigate("/admin");
         } else {
-          navigate("/"); // Otherwise, redirect to home page or user dashboard
+          navigate("/"); // Redirect to the home page or another page for users
         }
       }
     } catch (error) {
@@ -71,6 +69,7 @@ export default function LoginPage() {
                 {...register("email", { required: true })}
               />
             </div>
+            {errors.email && <p className="text-red-500 text-sm">Email is required</p>}
           </div>
 
           <div>
@@ -87,6 +86,7 @@ export default function LoginPage() {
                 {...register("password", { required: true })}
               />
             </div>
+            {errors.password && <p className="text-red-500 text-sm">Password is required</p>}
           </div>
 
           <div className="text-right text-sm">
@@ -95,23 +95,12 @@ export default function LoginPage() {
             </Link>
           </div>
 
-<<<<<<< HEAD
-          <Link to="/admin">
-            <button
-              type="submit"
-              className="w-full bg-[#0f3556] text-white font-semibold py-2 rounded-md hover:bg-[#0d2d49] transition login_button"
-            >
-              Log in
-            </button>
-          </Link>
-=======
           <button
             type="submit"
-            className="w-full bg-[#0f3556] text-white py-2 rounded-lg font-semibold hover:bg-[#0d2d49] transition"
+            className="w-full bg-[#0f3556] text-white font-semibold py-2 rounded-md hover:bg-[#0d2d49] transition"
           >
             Log in
           </button>
->>>>>>> main
         </form>
 
         <p className="text-sm text-gray-600 mt-6 text-center">

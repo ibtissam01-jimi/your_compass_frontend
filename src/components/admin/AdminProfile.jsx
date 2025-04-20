@@ -1,23 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { PencilIcon } from "lucide-react";
+import axios from "axios";
 
 const AdminProfile = () => {
   const [editMode, setEditMode] = useState(false);
   const [admin, setAdmin] = useState({
-    name: "L.A.A",
-    email: "admin@yourcompass.com",
-    role: "Administrateur",
-    phone: "+212 600 000 000",
-    city: "Casablanca",
-    country: "Maroc",
-    image: "/images/admin.png",
-    joinedAt: "01 Janvier 2024",
+    name: "",
+    email: "",
+    role: "",
+    phone: "",
+    city: "",
+    country: "",
+    image: "",
+    joinedAt: "",
     stats: {
-      users: 128,
-      services: 24,
-      places: 12,
+      users: 0,
+      services: 0,
+      places: 0,
     },
   });
+
+  useEffect(() => {
+    // Assurez-vous que l'URL de l'API est correcte
+    axios
+      .get("api/admin/profile")
+      .then((response) => {
+        setAdmin(response.data.admin);
+      })
+      .catch((error) => {
+        console.error("Il y a eu une erreur avec l'API :", error);
+      });
+  }, []);
 
   const handleChange = (e) => {
     setAdmin({ ...admin, [e.target.name]: e.target.value });
@@ -26,8 +39,17 @@ const AdminProfile = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setEditMode(false);
-    // Tu peux ici envoyer les données via une requête API (axios/fetch)
-    console.log("Admin mis à jour :", admin);
+    // Envoyer les données via une requête API pour mettre à jour l'admin
+    axios
+      .put("api/admin/profile", admin)
+      .then((response) => {
+        console.log("Admin mis à jour :", response.data);
+        // Vous pouvez mettre à jour l'état avec la réponse si nécessaire
+        setAdmin(response.data.admin);
+      })
+      .catch((error) => {
+        console.error("Erreur lors de la mise à jour de l'admin :", error);
+      });
   };
 
   return (
