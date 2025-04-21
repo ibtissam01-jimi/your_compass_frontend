@@ -114,7 +114,7 @@ export default function Navbar() {
   const menuItems = [
     { label: t("home"), link: "/" },
     { label: t("about"), link: "/about" },
-    { label: t("service"), link: "#service" },
+    { label: t("favorites"), link: "#favorites" },
     { label: t("cities"), link: "#cities", hasDropdown: true },
     { label: t("contact"), link: "#contact" },
   ];

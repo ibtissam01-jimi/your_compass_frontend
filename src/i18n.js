@@ -48,6 +48,7 @@ const resources = {
             title: "Destinations",
             description: "Explore the most beautiful tourist destinations, where breathtaking landscapes, rich history, and unique cultural experiences await at every turn."
           },
+          favorites:"favorites",
           cars: {
             title: "Rental Cars",
             description: "Enjoy the freedom to explore Morocco at your own pace with our reliable car rental services."
@@ -99,8 +100,10 @@ const resources = {
     }
   },
   fr: {
+
     translation: {
       home: "Accueil",
+      favorites:"Favoris",
       about: "À propos",
       service: "Service",
       cities: "Villes",
@@ -199,6 +202,7 @@ const resources = {
   },
   ar: {
     translation: {
+      favorites:"المفضلة",
       home: "الرئيسية",
       about: "من نحن",
       service: "الخدمة",
