@@ -14,7 +14,7 @@ import Guides from "../admin/Guides";
 import CitiesTable from "../admin/Cities";
 import AddCity from "../admin/AddCity";
 import Places from "../admin/Places";
-import AddPlace from "../admin/addPlace";
+import AddPlace from "../admin/AddPlace"; // Corrected the duplication
 
 function AdminPage() {
   const [activePage, setActivePage] = useState("dashboard");

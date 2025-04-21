@@ -51,22 +51,18 @@
 // export default TourGuides;
 
 
-
-
-
-
-
-
-
-
-
-
-
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useTranslation } from 'react-i18next';
+
+
+
 
 export default function TourGuides() {
+
+  
+  const { t } = useTranslation();
   const [guides, setGuides] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -75,9 +71,9 @@ export default function TourGuides() {
   useEffect(() => {
     axios.get("http://localhost:8000/guides")
       .then(response => {
-        console.log("Réponse reçue :", response.data); // Pour debug
-        if (Array.isArray(response.data)) {
-          setGuides(response.data);
+        console.log("Guide Response :", response.data); // Pour debug
+        if (Array.isArray(response.data.guides)) {
+          setGuides(response.data.guides);
         } else {
           console.error("La réponse n'est pas un tableau :", response.data);
           setGuides([]); // pour éviter les erreurs si ce n'est pas un tableau
@@ -108,11 +104,13 @@ export default function TourGuides() {
   return (
     <div className="max-w-full mx-auto py-10 px-4 mt-24 bg-white">
       <div className="mb-6">
-        <h2 className="text-3xl font-bold text-black">Tour Guides</h2>
-        <p className="text-gray-600 mb-10">
-          Connect with tourists and grow your business by joining our platform as a tour guide.
-        </p>
-      </div>
+      <h2 className="text-3xl font-bold text-black">
+        {t("tourGuides.title")}
+      </h2>
+      <p className="text-gray-600 mb-10">
+        {t("tourGuides.description")}
+      </p>
+    </div>
 
       <div className="relative w-full pl-16">
         <button
@@ -130,7 +128,7 @@ export default function TourGuides() {
               className="relative min-w-[30%] h-96 rounded-lg overflow-hidden shadow-lg transition-transform transform hover:scale-105"
             >
               <img
-                src={`http://localhost:8000${guide.photo}`} // Exemple : /images/guides/gui1.jpg
+                src={`http://localhost:8000${guide.photo}`} 
                 alt={guide.name}
                 className="w-full h-full object-cover rounded-lg"
               />

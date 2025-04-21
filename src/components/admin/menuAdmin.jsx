@@ -2,18 +2,19 @@ import React from "react";
 import {
   HomeIcon,
   FileTextIcon,
+  ServerIcon,
   UsersIcon,
   BriefcaseIcon,
   StarIcon,
   BuildingIcon,
-  SettingsIcon,
   LogOutIcon,
   BellIcon,
   SearchIcon,
   GlobeIcon,
-  ServerIcon,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const menuItems = [
   { label: "Dashboard", icon: <HomeIcon className="w-5 h-5" />, key: "dashboard" },
@@ -22,16 +23,47 @@ const menuItems = [
   { label: "Cities", icon: <BuildingIcon className="w-5 h-5" />, key: "cities" },
   { label: "Categories", icon: <BriefcaseIcon className="w-5 h-5" />, key: "categories" },
   { label: "Services", icon: <ServerIcon className="w-5 h-5" />, key: "services" },
-  { label: "Places", icon: <BuildingIcon className="w-5 h-5" />, key: "places" },
+  { label: "Activities", icon: <BuildingIcon className="w-5 h-5" />, key: "places" },
   { label: "Guides", icon: <BuildingIcon className="w-5 h-5" />, key: "clients" },
-  { label: "Settings", icon: <SettingsIcon className="w-5 h-5" />, key: "settings" },
   { label: "Logout", icon: <LogOutIcon className="w-5 h-5" />, key: "logout" },
 ];
 
 const Sidebar = ({ setActivePage, activePage }) => {
+  const handleLogout = async () => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You will be logged out!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#c5a76f",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, logout",
+    });
+  
+    if (result.isConfirmed) {
+      // Redirection immédiate
+      window.location.href = "http://localhost:5173";
+  
+      // Appel API logout en arrière-plan (optionnel)
+      try {
+        await axios.get("http://localhost:8000/sanctum/csrf-cookie", {
+          withCredentials: true,
+        });
+  
+        await axios.post("http://localhost:8000/api/logout", {}, {
+          withCredentials: true,
+        });
+  
+        console.log("Logout request sent.");
+      } catch (error) {
+        console.error("Logout error (but already redirected):", error);
+      }
+    }
+  };
+  
   return (
     <div className="min-h-screen bg-[#f9f9f9]">
-      {/* Top Nav */}
+      {/* Top Navigation Bar */}
       <div className="flex justify-between items-center bg-white px-6 py-4 shadow fixed w-full top-0 z-50">
         <div className="flex items-center gap-6">
           <h2 className="text-xl font-bold text-black">
@@ -52,7 +84,6 @@ const Sidebar = ({ setActivePage, activePage }) => {
             <BellIcon className="text-gray-600 w-5 h-5" />
             <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
           </button>
-          <GlobeIcon className="text-gray-500 w-5 h-5" />
           <div className="flex items-center gap-2">
             <Link to="/admin-profile" className="flex items-center gap-2 cursor-pointer">
               <img src="/images/admin.png" alt="User" className="w-8 h-8 rounded-full" />
@@ -76,7 +107,13 @@ const Sidebar = ({ setActivePage, activePage }) => {
                   ? "bg-[#c5a76f] text-white"
                   : "text-gray-700 hover:bg-[#0f3556] hover:text-white"
               }`}
-              onClick={() => setActivePage(item.key)}
+              onClick={() => {
+                if (item.key === "logout") {
+                  handleLogout();
+                } else {
+                  setActivePage(item.key);
+                }
+              }}
             >
               {item.icon}
               <span className="ml-3">{item.label}</span>
