@@ -117,7 +117,6 @@
 
 
 
-
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
@@ -146,16 +145,17 @@ export default function LoginPage() {
       if (response.status === 200) {
         // Stocker le token
         const token = response.data.Authorization.token;
-        const user = response.data.user;
+        const user = response.data.user; // Use user for both admin and regular user
 
         localStorage.setItem("token", token);
+
         alert("Logged in");
 
         // Redirection selon le rôle
         if (user.role === "admin") {
           navigate("/admin");
         } else {
-          navigate("/");
+          navigate("/"); // Redirect to the home page or another page for users
         }
       }
     } catch (error) {
@@ -197,6 +197,7 @@ export default function LoginPage() {
                 {...register("email", { required: true })}
               />
             </div>
+            {errors.email && <p className="text-red-500 text-sm">Email is required</p>}
           </div>
 
           <div>
@@ -213,6 +214,7 @@ export default function LoginPage() {
                 {...register("password", { required: true })}
               />
             </div>
+            {errors.password && <p className="text-red-500 text-sm">Password is required</p>}
           </div>
 
           <div className="text-right text-sm">
@@ -223,7 +225,7 @@ export default function LoginPage() {
 
           <button
             type="submit"
-            className="w-full bg-[#0f3556] text-white py-2 rounded-lg font-semibold hover:bg-[#0d2d49] transition"
+            className="w-full bg-[#0f3556] text-white font-semibold py-2 rounded-md hover:bg-[#0d2d49] transition"
           >
             Log in
           </button>
@@ -239,4 +241,5 @@ export default function LoginPage() {
     </div>
   );
 }
+
 

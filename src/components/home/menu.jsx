@@ -98,7 +98,6 @@
 
 
 
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Globe, ChevronDown } from "lucide-react";
@@ -243,4 +242,5 @@ export default function Navbar() {
     </nav>
   );
 }
+
 

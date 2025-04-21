@@ -13,8 +13,8 @@ import AddCategory from "../admin/AddCategoryPage";
 import Guides from "../admin/Guides";
 import CitiesTable from "../admin/Cities";
 import AddCity from "../admin/AddCity";
-import Places from '../admin/Places';
-import AddPlace from "../admin/AddPlace";
+import Places from "../admin/Places";
+import AddPlace from "../admin/AddPlace"; // Corrected the duplication
 
 function AdminPage() {
   const [activePage, setActivePage] = useState("dashboard");
@@ -33,17 +33,19 @@ function AdminPage() {
       setActivePage("cities");
     } else if (location.pathname.startsWith("/admin/places")) {
       setActivePage("places");
+    } else if (location.pathname.startsWith("/admin/clients")) {
+      setActivePage("clients");
     } else {
       setActivePage("dashboard");
     }
   }, [location.pathname]);
 
   const isAddSubmission = location.pathname === "/admin/submissions/ajouter";
-  const isAddService = location.pathname === "/admin/services/ajouter"; 
-  const isAddEvaluator = location.pathname === "/admin/evaluators/ajouter"; 
+  const isAddService = location.pathname === "/admin/services/ajouter";
+  const isAddEvaluator = location.pathname === "/admin/evaluators/ajouter";
   const isAddCategory = location.pathname === "/admin/categories/ajouter";
   const isAddCities = location.pathname === "/admin/cities/ajouter";
-  const isAddPlace = location.pathname === "/admin/places/ajouter"; 
+  const isAddPlace = location.pathname === "/admin/places/ajouter";
 
   return (
     <div className="flex">
@@ -80,7 +82,7 @@ function AdminPage() {
             {isAddPlace ? <AddPlace /> : <Places />}
           </>
         )}
-        {activePage === 'clients' && <Guides />}
+        {activePage === "clients" && <Guides />}
       </main>
     </div>
   );
