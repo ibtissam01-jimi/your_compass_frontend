@@ -1,3 +1,4 @@
+
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Youtube, Instagram, Facebook, Twitter } from "lucide-react";
@@ -67,3 +68,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

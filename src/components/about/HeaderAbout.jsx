@@ -30,6 +30,12 @@ const Carousel = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
   };
 
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? slides.length - 1 : prevIndex - 1
+    );
+  };
+
   useEffect(() => {
     const interval = setInterval(nextSlide, 2000);
     return () => clearInterval(interval);
@@ -60,7 +66,7 @@ const Carousel = () => {
         </p>
         <button
           className="flech-btn absolute left-5 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-[#0F3556] text-white rounded-full shadow-lg text-3xl"
-          onClick={() => setCurrentIndex((prevIndex) => (prevIndex === 0 ? slides.length - 1 : prevIndex - 1))}
+          onClick={prevSlide}
         >
           {'←'}
         </button>

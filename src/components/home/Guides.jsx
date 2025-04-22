@@ -1,158 +1,365 @@
-// import React from 'react';
+// import React, { useState, useEffect } from "react";
+// import { Button } from "@/components/ui/button";
+// import { SearchIcon } from "lucide-react";
+// import axios from "axios";
+// import AddGuide from "./AddGuide";
+// import EditGuide from "./EditGuide"; // Ensure EditGuide is imported
+// import { FaEdit, FaTrashAlt } from "react-icons/fa";
 
-// const TourGuides = () => {
+// const Guides = () => {
+//   const [searchText, setSearchText] = useState("");
+//   const [showForm, setShowForm] = useState(false);
+//   const [editingGuide, setEditingGuide] = useState(null);
+//   const [guides, setGuides] = useState([]);
+
+//   useEffect(() => {
+//     fetchGuides();
+//   }, []);
+
+//   const fetchGuides = async () => {
+//     try {
+//       const response = await axios.get("http://localhost:8000/guides");
+//       setGuides(response.data.guides);
+//     } catch (error) {
+//       console.error("Error fetching guides:", error);
+//     }
+//   };
+
+//   const handleDelete = async (id) => {
+//     try {
+//       await axios.delete(`http://localhost:8000/api/guides/${id}`);
+//       setGuides((prev) => prev.filter((g) => g.id !== id));
+//     } catch (error) {
+//       console.error("Error deleting guide:", error);
+//     }
+//   };
+
+//   const handleEdit = (guide) => {
+//     setEditingGuide(guide);
+//   };
+
+//   const handleSaveEdit = async (updatedGuide) => {
+//     try {
+//       await axios.put(`http://localhost:8000/api/guides/${updatedGuide.id}`, updatedGuide);
+//       setGuides((prev) =>
+//         prev.map((guide) => (guide.id === updatedGuide.id ? updatedGuide : guide))
+//       );
+//       setEditingGuide(null);
+//     } catch (error) {
+//       console.error("Error saving the edited guide:", error);
+//     }
+//   };
+
+//   const handleCancelEdit = () => {
+//     setEditingGuide(null);
+//   };
+
+//   const addGuide = (newGuide) => {
+//     setGuides((prev) => [...prev, newGuide]);
+//   };
+
+//   const filteredGuides = guides.filter((guide) =>
+//     guide.name.toLowerCase().includes(searchText.toLowerCase())
+//   );
+
 //   return (
-//     <div className="p-8 bg-white mt-24">
-//       <div className="mb">
-//         <h1 className="text-2xl font-bold mb-4 text-left text-black">Tour Guides</h1> {/* العنوان باللون الأسود */}
-//         <h2 className="text-lg mb-8 text-left text-black"> {/* النص باللون الأسود */}
-//           Connect with tourists and grow your business by joining our platform as a tour guide.
-//         </h2>
-//       </div>
+//     <div className="space-y-4">
+//       {!showForm && !editingGuide && (
+//         <>
+//           <div className="flex justify-between items-center mb-6">
+//             <h1 className="text-2xl font-semibold text-black">Guides</h1>
+//           </div>
 
-//       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-//         {/* بطاقة الدليل السياحي */}
-//         {[
-//           { name: "Guide Name 1", expertise: "Expertise Area 1", img: "images/gui1.jpeg" },
-//           { name: "Guide Name 2", expertise: "Expertise Area 2", img: "images/gui2.jpeg" },
-//           { name: "Guide Name 3", expertise: "Expertise Area 3", img: "images/gui3.jpeg" }
-//         ].map((guide, index) => (
-//           <div key={index} className="relative rounded-lg shadow-lg overflow-hidden group">
-//             {/* الصورة */}
-//             <img
-//               src={guide.img}
-//               alt={guide.name}
-//               className="w-full h-96 object-cover"
-//             />
-
-//             {/* النص على الصورة من الأسفل */}
-//             <div className="absolute inset-x-0 bottom-0 bg-black/50 flex justify-between items-center p-6">
-//               {/* النص من اليسار */}
-//               <div className="text-left text-white">
-//                 <h3 className="text-xl font-bold">{guide.name}</h3>
-//                 <p className="text-gray-300">{guide.expertise}</p>
-//               </div>
-
-//               {/* الزر على اليمين */}
-//               <div className="flex justify-end">
-//                 <button className="seeMore-btn bg-yellow-500 text-gray-900 font-semibold py-2 px-4 rounded-lg shadow-md 
-//                                    hover:bg-yellow-600 transition duration-300">
-//                   See more
-//                 </button>
+//           <div className="flex flex-wrap md:flex-nowrap justify-between gap-3 items-center mb-6">
+//             <div className="flex flex-wrap md:flex-nowrap gap-3 flex-grow">
+//               <div className="relative flex-1">
+//                 <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+//                 <input
+//                   type="text"
+//                   placeholder="Search guide"
+//                   className="pl-10 pr-4 py-2 w-full md:w-1/3 bg-white border border-gray-300 rounded-full shadow-sm text-black focus:outline-none focus:ring-2 focus:ring-[#c5a76f]"
+//                   value={searchText}
+//                   onChange={(e) => setSearchText(e.target.value)}
+//                 />
 //               </div>
 //             </div>
+
+//             <Button
+//               onClick={() => setShowForm(true)}
+//               className="bg-[#0f3556] text-white px-4 py-2 rounded hover:bg-[#b89e65] transition"
+//             >
+//               Add Guide
+//             </Button>
 //           </div>
-//         ))}
-//       </div>
+
+//           <div className="shadow-lg rounded-lg overflow-x-auto">
+//             <div className="p-4">
+//               <table className="min-w-full text-sm text-left border-collapse bg-[#f4f1ec]">
+//                 <thead className="bg-gray-100 text-gray-600">
+//                   <tr>
+//                     <th className="px-4 py-2 font-medium text-black">Photo</th>
+//                     <th className="px-4 py-2 font-medium text-black">Name</th>
+//                     <th className="px-4 py-2 font-medium text-black">Email</th>
+//                     <th className="px-4 py-2 font-medium text-black">Address</th>
+//                     <th className="px-4 py-2 font-medium text-black">City</th>
+//                     <th className="px-4 py-2 font-medium text-black">CIN</th>
+//                     <th className="px-4 py-2 font-medium text-black">CV</th>
+//                     <th className="px-4 py-2 font-medium text-black">Phone</th>
+//                     <th className="px-4 py-2 font-medium text-black">Actions</th>
+//                   </tr>
+//                 </thead>
+//                 <tbody>
+//                   {filteredGuides.length > 0 ? (
+//                     filteredGuides.map((guide) => (
+//                       <tr key={guide.id} className="border-t hover:bg-gray-50">
+//                         <td className="px-4 py-2">
+//                           <img
+//                             src={`http://localhost:8000${guide.photo}`}
+//                             alt={guide.name}
+//                             className="w-10 h-10 rounded-full"
+//                           />
+//                         </td>
+//                         <td className="px-4 py-2 text-black">{guide.name}</td>
+//                         <td className="px-4 py-2 text-black">{guide.email}</td>
+//                         <td className="px-4 py-2 text-black">{guide.address}</td>
+//                         <td className="px-4 py-2 text-black">{guide.city}</td>
+//                         <td className="px-4 py-2 text-black">{guide.cin}</td>
+//                         <td className="px-4 py-2 text-black">
+//                           <a
+//                             href={guide.cv}
+//                             className="text-blue-600 underline"
+//                             target="_blank"
+//                             rel="noopener noreferrer"
+//                           >
+//                             View CV
+//                           </a>
+//                         </td>
+//                         <td className="px-4 py-2 text-black">{guide.phone_number}</td>
+//                         <td className="px-4 py-2 flex gap-3">
+//                           <button onClick={() => handleEdit(guide)} title="Edit">
+//                             <FaEdit className="text-white" />
+//                           </button>
+//                           <button onClick={() => handleDelete(guide.id)} title="Delete">
+//                             <FaTrashAlt className="text-white" />
+//                           </button>
+//                         </td>
+//                       </tr>
+//                     ))
+//                   ) : (
+//                     <tr>
+//                       <td colSpan="9" className="p-4 text-center text-gray-500">
+//                         No guides found.
+//                       </td>
+//                     </tr>
+//                   )}
+//                 </tbody>
+//               </table>
+//             </div>
+//           </div>
+//         </>
+//       )}
+
+//       {showForm && <AddGuide setShowForm={setShowForm} addGuide={addGuide} />}
+      
+//       {editingGuide && (
+//         <EditGuide
+//           guide={editingGuide}
+//           onSave={handleSaveEdit}
+//           onCancel={handleCancelEdit}
+//         />
+//       )}
 //     </div>
 //   );
 // };
 
-// export default TourGuides;
+// export default Guides;
 
 
-import { ChevronRight, ChevronLeft } from "lucide-react";
-import { useState, useEffect } from "react";
+
+
+
+
+
+
+
+
+
+import React, { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { SearchIcon } from "lucide-react";
 import axios from "axios";
-import { useTranslation } from 'react-i18next';
+import AddGuide from "./AddGuide";
+import EditGuide from "./EditGuide"; // Import de EditGuide
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
 
-
-
-
-export default function TourGuides() {
-
-  
-  const { t } = useTranslation();
+const Guides = () => {
+  const [searchText, setSearchText] = useState("");
+  const [showForm, setShowForm] = useState(false);
+  const [editingGuide, setEditingGuide] = useState(null);
   const [guides, setGuides] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const itemsPerSlide = 3;
 
   useEffect(() => {
-    axios.get("http://localhost:8000/guides")
-      .then(response => {
-        console.log("Guide Response :", response.data); // Pour debug
-        if (Array.isArray(response.data.guides)) {
-          setGuides(response.data.guides);
-        } else {
-          console.error("La réponse n'est pas un tableau :", response.data);
-          setGuides([]); // pour éviter les erreurs si ce n'est pas un tableau
-        }
-      })
-      .catch(error => {
-        console.error("Erreur lors du chargement des guides touristiques :", error);
-      });
+    fetchGuides();
   }, []);
 
-  const totalSlides = Math.ceil(guides.length / itemsPerSlide);
-
-  const nextGuides = () => {
-    if (currentIndex < totalSlides - 1) {
-      setCurrentIndex(currentIndex + 1);
+  const fetchGuides = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/guides");
+      setGuides(response.data.guides);
+    } catch (error) {
+      console.error("Error fetching guides:", error);
     }
   };
 
-  const prevGuides = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:8000/api/guides/${id}`);
+      setGuides((prev) => prev.filter((g) => g.id !== id));
+    } catch (error) {
+      console.error("Error deleting guide:", error);
     }
   };
 
-  const startIndex = currentIndex * itemsPerSlide;
-  const visibleGuides = guides.slice(startIndex, startIndex + itemsPerSlide);
+  const handleEdit = (guide) => {
+    setEditingGuide(guide); // Afficher le formulaire d'édition
+  };
+
+  const handleSaveEdit = async (updatedGuide) => {
+    try {
+      await axios.put(`http://localhost:8000/api/guides/${updatedGuide.id}`, updatedGuide);
+      setGuides((prev) =>
+        prev.map((guide) => (guide.id === updatedGuide.id ? updatedGuide : guide))
+      );
+      setEditingGuide(null); // Fermer le formulaire d'édition après la sauvegarde
+    } catch (error) {
+      console.error("Error saving the edited guide:", error);
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setEditingGuide(null); // Annuler l'édition
+  };
+
+  const addGuide = (newGuide) => {
+    setGuides((prev) => [...prev, newGuide]);
+  };
+
+  const filteredGuides = guides.filter((guide) =>
+    guide.name.toLowerCase().includes(searchText.toLowerCase())
+  );
 
   return (
-    <div className="max-w-full mx-auto py-10 px-4 mt-24 bg-white">
-      <div className="mb-6">
-      <h2 className="text-3xl font-bold text-black">
-        {t("tourGuides.title")}
-      </h2>
-      <p className="text-gray-600 mb-10">
-        {t("tourGuides.description")}
-      </p>
-    </div>
+    <div className="space-y-4">
+      {/* Affichage de la liste des guides */}
+      {!showForm && !editingGuide && (
+        <>
+          <div className="flex justify-between items-center mb-6">
+            <h1 className="text-2xl font-semibold text-black">Guides</h1>
+          </div>
 
-      <div className="relative w-full pl-16">
-        <button
-          onClick={prevGuides}
-          disabled={currentIndex === 0}
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-gray-200 rounded-full shadow-md z-10 disabled:bg-gray-300"
-        >
-          <ChevronLeft className="text-gray-700" />
-        </button>
-
-        <div className="flex gap-8 transition-transform duration-500 ease-in-out">
-          {visibleGuides.map((guide, index) => (
-            <div
-              key={index}
-              className="relative min-w-[30%] h-96 rounded-lg overflow-hidden shadow-lg transition-transform transform hover:scale-105"
-            >
-              <img
-                src={`http://localhost:8000${guide.photo}`} 
-                alt={guide.name}
-                className="w-full h-full object-cover rounded-lg"
-              />
-              <div className="absolute inset-x-0 bottom-0 bg-black/50 flex justify-between items-center p-4">
-                <div className="text-left text-white">
-                  <h3 className="text-xl font-bold">{guide.name}</h3>
-               
-                </div>
-                <button className="bg-yellow-500 text-gray-900 font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-yellow-600 transition duration-300">
-                  <a href={guide.email}>Contact</a>
-                </button>
+          <div className="flex flex-wrap md:flex-nowrap justify-between gap-3 items-center mb-6">
+            <div className="flex flex-wrap md:flex-nowrap gap-3 flex-grow">
+              <div className="relative flex-1">
+                <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <input
+                  type="text"
+                  placeholder="Search guide"
+                  className="pl-10 pr-4 py-2 w-full md:w-1/3 bg-white border border-gray-300 rounded-full shadow-sm text-black focus:outline-none focus:ring-2 focus:ring-[#c5a76f]"
+                  value={searchText}
+                  onChange={(e) => setSearchText(e.target.value)}
+                />
               </div>
             </div>
-          ))}
-        </div>
 
-        <button
-          onClick={nextGuides}
-          disabled={currentIndex >= totalSlides - 1}
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-gray-200 rounded-full shadow-md z-10 disabled:bg-gray-300"
-        >
-          <ChevronRight className="text-gray-700" />
-        </button>
-      </div>
+            <Button
+              onClick={() => setShowForm(true)}
+              className="bg-[#0f3556] text-white px-4 py-2 rounded hover:bg-[#b89e65] transition"
+            >
+              Add Guide
+            </Button>
+          </div>
+
+          <div className="shadow-lg rounded-lg overflow-x-auto">
+            <div className="p-4">
+              <table className="min-w-full text-sm text-left border-collapse bg-[#f4f1ec]">
+                <thead className="bg-gray-100 text-gray-600">
+                  <tr>
+                    <th className="px-4 py-2 font-medium text-black">Photo</th>
+                    <th className="px-4 py-2 font-medium text-black">Name</th>
+                    <th className="px-4 py-2 font-medium text-black">Email</th>
+                    <th className="px-4 py-2 font-medium text-black">Address</th>
+                    <th className="px-4 py-2 font-medium text-black">City</th>
+                    <th className="px-4 py-2 font-medium text-black">CIN</th>
+                    <th className="px-4 py-2 font-medium text-black">CV</th>
+                    <th className="px-4 py-2 font-medium text-black">Phone</th>
+                    <th className="px-4 py-2 font-medium text-black">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredGuides.length > 0 ? (
+                    filteredGuides.map((guide) => (
+                      <tr key={guide.id} className="border-t hover:bg-gray-50">
+                        <td className="px-4 py-2">
+                          <img
+                            src={`http://localhost:8000${guide.photo}`}
+                            alt={guide.name}
+                            className="w-10 h-10 rounded-full"
+                          />
+                        </td>
+                        <td className="px-4 py-2 text-black">{guide.name}</td>
+                        <td className="px-4 py-2 text-black">{guide.email}</td>
+                        <td className="px-4 py-2 text-black">{guide.address}</td>
+                        <td className="px-4 py-2 text-black">{guide.city}</td>
+                        <td className="px-4 py-2 text-black">{guide.cin}</td>
+                        <td className="px-4 py-2 text-black">
+                          <a
+                            href={guide.cv}
+                            className="text-blue-600 underline"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            View CV
+                          </a>
+                        </td>
+                        <td className="px-4 py-2 text-black">{guide.phone_number}</td>
+                        <td className="px-4 py-2 flex gap-3">
+                          <button onClick={() => handleEdit(guide)} title="Edit">
+                            <FaEdit className="text-white" />
+                          </button>
+                          <button onClick={() => handleDelete(guide.id)} title="Delete">
+                            <FaTrashAlt className="text-white" />
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="9" className="p-4 text-center text-gray-500">
+                        No guides found.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* Formulaire pour ajouter un guide */}
+      {showForm && <AddGuide setShowForm={setShowForm} addGuide={addGuide} />}
+
+      {/* Formulaire pour éditer un guide */}
+      {editingGuide && (
+        <EditGuide
+          guide={editingGuide}
+          onSave={handleSaveEdit} // Passer handleSaveEdit comme prop
+          onCancel={handleCancelEdit}
+        />
+      )}
     </div>
   );
-}
+};
+
+export default Guides;
+

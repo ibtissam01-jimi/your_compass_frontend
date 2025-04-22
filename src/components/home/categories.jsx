@@ -1,3 +1,4 @@
+
 // import React from "react";
 // import { Hotel, Users, Utensils, MapPin, Car } from "lucide-react";
 
@@ -123,4 +124,5 @@ const Features = () => {
 };
 
 export default Features;
+
 

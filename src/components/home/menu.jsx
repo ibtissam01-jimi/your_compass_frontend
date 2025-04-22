@@ -1,3 +1,4 @@
+
 // import { useState } from "react";
 // import { Link } from "react-router-dom";
 // import { Globe, ChevronDown } from "lucide-react"; // Import the ChevronDown icon
@@ -243,5 +244,6 @@ export default function Navbar() {
     </nav>
   );
 }
+
 
 
