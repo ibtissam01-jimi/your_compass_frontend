@@ -116,7 +116,7 @@ export default function Navbar() {
   { label: t("about"), link: "/about" },
   { label: t("favorites"), link: "/favorites" },
   { label: t("cities"), link: "#cities", hasDropdown: true },  // Cities with dropdown
-  { label: t("contact"), link: "#contact" },
+  { label: t("contact"), link: "/contact" },
 ];
 
 
@@ -244,5 +244,6 @@ export default function Navbar() {
     </nav>
   );
 }
+
 
 
