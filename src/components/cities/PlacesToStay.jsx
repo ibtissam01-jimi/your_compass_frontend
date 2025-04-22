@@ -122,7 +122,7 @@ const PlacesToStay = () => {
   //2
 
   useEffect(() => {
-    axios.get('http://localhost:8000/hotels/filtered')
+    axios.get('http://localhost:8000/api/hotels/filtered')
       .then(response => {
         console.log("Services récupérés :", response.data); // Pour debug
         setServices(response.data);

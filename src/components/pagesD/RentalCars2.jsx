@@ -9,6 +9,9 @@ import globalDriveImg from '../assets/global_drive.jpg';
 import moroccoRentCarsImg from '../assets/morocco_rent_cars.jpg';
 import Navbar from "../home/menu";
 import Footer from "../home/footer";
+import HeroSection3 from '../cities/HeroSection3';
+import FilterCars from '../cities/FilterCars';
+
 
 const rentalAgencies = [
   { 
@@ -69,22 +72,8 @@ const rentalAgencies = [
 
 const RentalCars = () => {
   return ( <> <Navbar/>
-    <div className="bg-gray-100 py-16 px-4 sm:px-8 md:px-16">
-      <h1 className="text-4xl font-bold text-center text-[#0F3556] mb-6">Agences de Location de Voitures à Tanger</h1>
-      <p className="text-center text-lg text-gray-700 mb-12">Trouvez une agence de location pour votre séjour.</p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {rentalAgencies.map((agency, index) => (
-          <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-xl">
-            <img src={agency.image} alt={agency.name} className="w-full h-56 object-cover" />
-            <div className="p-6">
-              <h2 className="text-xl font-semibold text-[#0F3556] mb-2">{agency.name}</h2>
-              <p className="text-gray-600 text-sm mb-4"><strong>Adresse:</strong> {agency.address}</p>
-              <p className="text-gray-600 text-sm mb-4"><strong>Téléphone:</strong> {agency.phone}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+  <HeroSection3/>
+ < FilterCars/>
     <Footer/></>
   );
 };

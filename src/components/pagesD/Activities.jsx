@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from "../home/menu";
 import Footer from "../home/footer";
-
+import HeroSectionAc from '../cities/HeroSectionAc';
 // Importation des images
 import promenadeImg from '../assets/promenade.jpg';
 import excursionBateauImg from '../assets/excursion_bateau.jpg';
@@ -22,6 +22,7 @@ import veloElectriqueImg from '../assets/velo_electrique.jpg';
 import capMalabataImg from '../assets/cap_malabata.jpg';
 import yogaImg from '../assets/yoga.jpg';
 import safariPhotoImg from '../assets/safari_photo.jpg';
+import FilterActivities from '../cities/FilterActivities';
 
 const activities = [
   { 
@@ -142,22 +143,8 @@ const activities = [
 
 const Activities = () => {
   return (<> <Navbar/>
-    <div className="bg-gray-100 py-10 px-4 sm:px-8 md:px-16">
-      <h1 className="text-center text-3xl font-bold text-[#0F3556] mb-8">Activités à Tanger</h1>
-      <p className="text-center text-lg text-gray-700 mb-12">Explorez les activités et attractions incontournables à Tanger.</p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {activities.map((activity, index) => (
-          <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-xl">
-            <img src={activity.image} alt={activity.name} className="w-full h-56 object-cover" />
-            <div className="p-6">
-              <h2 className="text-xl font-semibold text-[#0F3556] mb-2">{activity.name}</h2>
-              <p className="text-gray-600 text-sm mb-4">{activity.description}</p>
-              <p className="text-gray-700 text-sm"><strong>Prix:</strong> {activity.price}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+    <HeroSectionAc />
+    <FilterActivities/>
    <Footer/> </>
   );
 };

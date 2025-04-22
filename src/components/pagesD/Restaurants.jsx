@@ -26,6 +26,8 @@ import mediterraneenneImg from '../assets/mediterraneenne.jpg';
 import grillImg from '../assets/grill.jpg';
 import Navbar from "../home/menu";
 import Footer from "../home/footer";
+import FilterRestaurants from '../cities/FilterRestaurants';
+import HeroSectionRes from '../cities/HeroSectionRes';
 
 
 const restaurants = [
@@ -188,27 +190,10 @@ const restaurants = [
 ];
 
 const Restaurants = () => {
-  return ( <> <Navbar/>
-    <div className="bg-gray-100 py-16 px-4 sm:px-8 md:px-16">
-      <h1 className="text-4xl font-bold text-center text-[#0F3556] mb-6">Restaurants à Tanger</h1>
-      <p className="text-center text-lg text-gray-700 mb-12">Découvrez les meilleurs restaurants et saveurs locales.</p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {restaurants.map((restaurant, index) => (
-          <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-xl">
-            <img src={restaurant.image} alt={restaurant.name} className="w-full h-56 object-cover rounded-t-lg" />
-            <div className="p-6">
-              <h2 className="text-xl font-semibold text-[#0F3556] mb-2">{restaurant.name}</h2>
-              <p className="text-gray-600 text-sm mb-4">{restaurant.description}</p>
-              <p className="text-gray-600 text-sm mb-4">Prix: {restaurant.price}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+  return ( <> <Navbar/>     
+   <HeroSectionRes />
+   <FilterRestaurants/>
    <Footer/> </>
-
-
-
 );
 };
 

@@ -15,7 +15,7 @@ const RentalCars = () => {
   };
 
   useEffect(() => {
-    axios.get('http://localhost:8000/RentalCars/filtered')
+    axios.get('http://localhost:8000/api/RentalCars/filtered')
       .then((response) => {
         console.log("Voitures récupérées :", response.data);
         setCars(response.data);

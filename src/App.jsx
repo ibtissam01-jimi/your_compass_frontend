@@ -23,14 +23,13 @@ import Activities from './components/pagesD/Activities';
 import Restaurants from './components/pagesD/Restaurants';
 import RentalCars from './components/pagesD/RentalCars2';
 import Cheznous from './components/cities/Cheznous'; 
-
-
+import HeroSection3 from './components/cities/HeroSection3';
+import HeroSection2 from './components/cities/HeroSection2';
 function App() {
   return (
     <Router>
       <Routes>
-      
-            
+
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/AddBuss" element={<BusinessForm />} />
@@ -54,6 +53,8 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/service" element={<Service />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/Hotel" element={<HeroSection2/>} />
+        <Route path="/car-rental" element={<HeroSection3/>} />
 
       </Routes>
     </Router >

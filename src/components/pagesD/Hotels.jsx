@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from "../home/menu";
 import Footer from "../home/footer";
+import HeroSection2 from '../cities/HeroSection2';
 // Importation des images
 import img1 from '../assets/img1.png';
 import img2 from '../assets/img2.png';
@@ -23,6 +24,7 @@ import img18 from '../assets/img18.png';
 import img19 from '../assets/img19.png';
 import img20 from '../assets/img20.png';
 import img21 from '../assets/img21.png';
+import FilterHotels from '../cities/FilterHotels';
 
 const hotels = [
   { 
@@ -197,31 +199,19 @@ const hotels = [
 
 const Hotels = () => {
   return ( <> <Navbar/>
-    <div className="bg-gray-100 py-10 px-4 sm:px-8 md:px-16">
-      <h1 className="text-center text-3xl font-bold text-[#0F3556] mb-12">Hôtels à Tanger</h1>
-      <p className="text-center text-lg text-gray-700 mb-12">Découvrez les meilleurs hôtels de Tanger et profitez de ses hébergements uniques et de qualité.</p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {hotels.map((hotel, index) => (
-          <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-xl">
-            <img src={hotel.image} alt={hotel.name} className="w-full h-56 object-cover" />
-            <div className="p-6">
-              <h2 className="text-xl font-semibold text-[#0F3556] mb-2">{hotel.name}</h2>
-              <p className="text-gray-600 text-sm mb-4"><strong>Adresse:</strong> {hotel.address}</p>
-              <p className="text-gray-700 text-sm mb-4"><strong>Description:</strong> {hotel.description}</p>
-              <p className="text-gray-600 text-sm mb-4"><strong>Prix:</strong> {hotel.price}</p>
-              <p className="text-yellow-500 text-sm mb-4 flex items-center">
-                ⭐ {hotel.rating} / 5
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+      <HeroSection2 />
+      <FilterHotels/>
    <Footer/> </>
   );
 };
 
 export default Hotels;
+
+
+
+
+
+
 
 
 

@@ -15,7 +15,7 @@ const ThingsToDoPlaces = () => {
   };
 
   useEffect(() => {
-    axios.get('http://localhost:8000/Activities/filtered')
+    axios.get('http://localhost:8000/api/Activities/filtered')
       .then(response => {
         console.log("Lieux récupérés :", response.data);
         setPlaces(response.data);
