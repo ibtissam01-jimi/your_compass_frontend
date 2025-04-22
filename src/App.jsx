@@ -7,10 +7,13 @@ import SignUp from "./components/forms/signin";
 import ResetPassword from "./components/forms/resetPassword";
 import ProfileForm from "./components/forms/addGuides";
 import AboutPage from "./components/pages/aboutPage";
+import Sidebar from "./components/admin/menuAdmin"; // Keep the Sidebar import
 import AdminPage from "./components/pages/adminPage";
 import AdminProfile from "./components/admin/AdminProfile";
 import Favorites from "./components/home/Favorites";
 import ContactPage from "./components/home/contact";
+import SubmissionsTable from "./components/admin/Submissions";
+
 
 function App() {
   return (
@@ -31,6 +34,10 @@ function App() {
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/contact" element={<ContactPage />} />
 
+
+
+        <Route path="/admin-sidebar" element={<Sidebar />} /> {/* Keep Sidebar route */}
+        <Route path="/submission" element={<SubmissionsTable />} />
 
       </Routes>
     </Router>
