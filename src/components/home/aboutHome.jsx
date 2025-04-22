@@ -1,4 +1,5 @@
 import React from 'react';
+// import { Link } from "react-router-dom";
 
 const AboutUs = () => {
   return (
@@ -12,9 +13,12 @@ const AboutUs = () => {
           olor sit amet, consectetur adipiscing elit. Voluptates, atque. A minima sapiente consequuntur maiores accusantium debitis quasi fugiat, ipsum impedit voluptate harum adipisci minus quidem assumenda velit!
           olor sit amet, consectetur adipiscing elit. Voluptates, atque. A minima sapiente consequuntur maiores accusantium debitis quasi fugiat, ipsum impedit voluptate harum adipisci minus quidem assumenda velit!
         </p>
-        <button className="bg-[#c3a37d] text-white py-2 px-6 rounded-lg shadow-md hover:bg-[#a88b6a] transition duration-300">
-          Read More
-        </button>
+        
+          <button className="bg-[#c3a37d] text-white py-2 px-6 rounded-lg shadow-md hover:bg-[#a88b6a] transition duration-300">
+            Read More
+          </button>
+        
+
       </div>
       <div className="md:w-1/2 mt-8 md:mt-0 flex justify-center">
         <img src="images/abt.jpeg" alt="People riding camels" className="w-[400px] h-auto rounded-lg shadow-lg" />

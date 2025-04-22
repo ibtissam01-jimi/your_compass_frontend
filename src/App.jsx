@@ -10,6 +10,7 @@ import AboutPage from "./components/pages/aboutPage";
 import AdminPage from "./components/pages/adminPage";
 import AdminProfile from "./components/admin/AdminProfile";
 import Favorites from "./components/home/Favorites";
+import ContactPage from "./components/home/contact";
 
 function App() {
   return (
@@ -28,6 +29,8 @@ function App() {
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/admin-profile" element={<AdminProfile />} />
         <Route path="/favorites" element={<Favorites />} />
+        <Route path="/contact" element={<ContactPage />} />
+
 
       </Routes>
     </Router>

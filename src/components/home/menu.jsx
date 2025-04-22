@@ -11,7 +11,7 @@ export default function Navbar() {
     { label: "ABOUT US", link: "/about" },
     { label: "FAVORITE", link: "/favorites" },
     { label: "CITIES", link: "#cities", hasDropdown: true },  // Mark 'Cities' with dropdown
-    { label: "CONTACT", link: "#contact" },
+    { label: "CONTACT", link: "/contact" },
   ];
 
   const cities = ["Tanger", "Chefchaouen", "Marrakech", "Casablanca"];
