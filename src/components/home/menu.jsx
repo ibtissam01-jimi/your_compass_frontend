@@ -111,12 +111,13 @@ export default function Navbar() {
   const { t, i18n } = useTranslation();
 
   const menuItems = [
-    { label: t("home"), link: "/" },
-    { label: t("about"), link: "/about" },
-    { label: t("favorites"), link: "#favorites" },
-    { label: t("cities"), link: "#cities", hasDropdown: true },
-    { label: t("contact"), link: "#contact" },
-  ];
+  { label: t("home"), link: "/" },
+  { label: t("about"), link: "/about" },
+  { label: t("favorites"), link: "/favorites" },
+  { label: t("cities"), link: "#cities", hasDropdown: true },  // Cities with dropdown
+  { label: t("contact"), link: "#contact" },
+];
+
 
   const cities = ["Tanger", "Chefchaouen", "Marrakech", "Casablanca"];
 
