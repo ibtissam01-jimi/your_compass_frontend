@@ -1,18 +1,18 @@
 @import "tailwindcss";
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 html, body {
   width: 100%;
   height: 100%;
@@ -29,30 +29,15 @@ body {
   color: white;
 }
 
-button.flech-btn {
-  background-color: #0F3556;
-  color: white;
-}
-
-button:hover {
-  opacity: 0.8;
-}
-
-button.seeMore-btn {
-  background-color: #ffffff;
-  color: rgb(0, 0, 0);
-}
-
 a {
   font-weight: 500;
   color: #ffffff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #ffffff;
 }
-
-
 
 h1 {
   font-size: 3.2em;
@@ -70,27 +55,27 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
+  opacity: 0.8;
   border-color: #ffffff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #ffffff;
-  }
-  button {
-    background-color: #c5a76f;
-  }
+/* Boutons personnalisés */
+button.flech-btn {
+  background-color: #0F3556;
+  color: white;
 }
 
+button.seeMore-btn {
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+}
 
 button.login-btn {
   background-color: #FFFFFF !important; 
@@ -102,14 +87,68 @@ button.signup-btn {
   color: white !important; 
 }
 
+button.login_button,
+button.sign_up_button,
+button.reset_password_button,
+button.login_in,
+button.soumission_button,
+button.services_button {
+  background-color: #0f3556 !important;
+  color: #FFFFFF !important;
+}
 
+button.eyes {
+  background-color: #ffffff !important; 
+}
+
+button.cancel_buss {
+  background-color: #FFFFFF !important; 
+  color: #c5a76f !important; 
+}
+
+button.app_button {
+  background-color: rgb(55, 166, 55) !important;
+}
+
+/* Classes de texte */
+.forget_password,
+.create_account,
+.login_signin,
+.site_web {
+  color: #0f3556 !important;
+  text-decoration: underline !important;
+}
+
+.create_account:hover,
+.forget_password:hover,
+.login_signin:hover {
+  color: #0f3556 !important; 
+  text-decoration: underline !important; 
+}
+
+.cv {
+  background-color: #D9D9D9 !important;
+}
+
+.cv_guide {
+  color: black !important;
+}
+
+.custom-black-color {
+  color: black !important;
+}
+
+/* Mode clair */
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
   }
 
-  
+  button {
+    background-color: #c5a76f;
+  }
+
   button.login-btn {
     background-color: #f9f9f9 !important; 
     color: #c5a76f !important;

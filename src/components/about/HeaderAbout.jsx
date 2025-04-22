@@ -2,22 +2,22 @@ import React, { useState, useEffect } from "react";
 
 const slides = [
   {
-    image: "images/pict.png",
+    image: "images/aboutFirst.jpg",
     title: "Welcome to Morocco",
     description: "Your Compass, your gateway to discovering Morocco's magic.",
   },
   {
-    image: "images/chefch.png",
+    image: "images/chefchaouen.png",
     title: "Welcome to Chefchaouen",
     description: "Experience the enchanting blue city of Chefchaouen with Your Compass.",
   },
   {
-    image: "images/merr.png",
+    image: "images/merra.png",
     title: "Welcome to Marrakech",
     description: "Discover the magic of Marrakech with Your Compass.",
   },
   {
-    image: "images/pict2.jpg",
+    image: "images/tanger.png",
     title: "Welcome to Tangier",
     description: "Explore the vibrant beauty of Tangier with Your Compass.",
   },
@@ -28,6 +28,12 @@ const Carousel = () => {
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? slides.length - 1 : prevIndex - 1
+    );
   };
 
   useEffect(() => {
@@ -60,7 +66,7 @@ const Carousel = () => {
         </p>
         <button
           className="flech-btn absolute left-5 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-[#0F3556] text-white rounded-full shadow-lg text-3xl"
-          onClick={() => setCurrentIndex((prevIndex) => (prevIndex === 0 ? slides.length - 1 : prevIndex - 1))}
+          onClick={prevSlide}
         >
           {'←'}
         </button>
