@@ -16,9 +16,10 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 
+
 const menuItems = [
   { label: "Dashboard", icon: <HomeIcon className="w-5 h-5" />, key: "dashboard" },
-  { label: "Submissions", icon: <FileTextIcon className="w-5 h-5" />, key: "submission" },
+  // { label: "Submissions", icon: <FileTextIcon className="w-5 h-5" />, key: "submission" },
   { label: "Users", icon: <UsersIcon className="w-5 h-5" />, key: "evaluators" },
   { label: "Cities", icon: <BuildingIcon className="w-5 h-5" />, key: "cities" },
   { label: "Categories", icon: <BriefcaseIcon className="w-5 h-5" />, key: "categories" },
@@ -80,10 +81,18 @@ const Sidebar = ({ setActivePage, activePage }) => {
         </div>
 
         <div className="flex items-center gap-6">
-          <button className="relative">
+          {/* <button className="relative">
             <BellIcon className="text-gray-600 w-5 h-5" />
             <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-          </button>
+          </button> */}
+
+<Link to="/submission" className="relative flex items-center gap-2 cursor-pointer">
+      <BellIcon className="text-gray-600 w-5 h-5" />
+      {/* Badge de notification */}
+      <span className="absolute top-0 right-0 inline-flex items-center justify-center w-2.5 h-2.5 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full">
+        {/* Optionnellement, vous pouvez afficher le nombre de notifications ici */}
+      </span>
+    </Link>
           <div className="flex items-center gap-2">
             <Link to="/admin-profile" className="flex items-center gap-2 cursor-pointer">
               <img src="/images/admin.png" alt="User" className="w-8 h-8 rounded-full" />

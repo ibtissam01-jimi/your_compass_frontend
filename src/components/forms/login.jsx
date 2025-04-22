@@ -173,7 +173,7 @@ export default function LoginPage() {
       }}
     >
       <h1 className="text-4xl italic font-bold text-[#0A2B4A] font-serif mb-6">
-        Your <span className="text-yellow-500">Compass</span>
+        Your <span style={{color:"#8C7D60"}}>Compass</span>
       </h1>
 
       <div className="bg-white p-8 rounded-xl shadow-xl w-full max-w-md">

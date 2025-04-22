@@ -265,7 +265,7 @@ export default function Services() {
               <tr>
                 <th className="px-4 py-2 font-medium text-black">Image</th>
                 <th className="px-4 py-2 font-medium text-black">Nom</th>
-                <th className="px-4 py-2 font-medium text-black">Description</th>
+                
                 <th className="px-4 py-2 font-medium text-black">Website</th>
                 <th className="px-4 py-2 font-medium text-black">Adresse</th>
                 <th className="px-4 py-2 font-medium text-black">Email</th>
@@ -286,7 +286,7 @@ export default function Services() {
                       )}
                     </td>
                     <td className="px-4 py-2 text-black">{service.name}</td>
-                    <td className="px-4 py-2 text-black">{service.description}</td>
+                    
                     <td className="px-4 py-2 text-blue-700 underline">
                       <a href={service.website} target="_blank" rel="noreferrer">
                         {service.website}

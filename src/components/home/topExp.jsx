@@ -8,7 +8,7 @@ const ExperienceSection = () => {
   const [userId, setUserId] = useState(1); // À remplacer avec la vraie auth
 
   useEffect(() => {
-    axios.get("http://localhost:8000/api/services")
+    axios.get("http://localhost:8000/services")
       .then(res => setExperiences(res.data))
       .catch(err => console.error("Erreur lors du chargement des services", err));
   }, []);

@@ -138,7 +138,7 @@ export default function TourGuides() {
                
                 </div>
                 <button className="bg-yellow-500 text-gray-900 font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-yellow-600 transition duration-300">
-                  See more
+                  <a href={guide.email}>Contact</a>
                 </button>
               </div>
             </div>

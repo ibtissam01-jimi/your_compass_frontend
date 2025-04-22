@@ -11,6 +11,7 @@ import Sidebar from "./components/admin/menuAdmin"; // Keep the Sidebar import
 import AdminPage from "./components/pages/adminPage";
 import AdminProfile from "./components/admin/AdminProfile";
 import Favorites from "./components/home/Favorites";
+import SubmissionsTable from "./components/admin/Submissions";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/admin-profile" element={<AdminProfile />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/admin-sidebar" element={<Sidebar />} /> {/* Keep Sidebar route */}
+        <Route path="/submission" element={<SubmissionsTable />} />
       </Routes>
     </Router>
   );

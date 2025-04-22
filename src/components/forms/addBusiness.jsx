@@ -492,127 +492,145 @@ const BusinessForm = () => {
       }}
     >
       <form onSubmit={handleSubmit(onSubmit)}
-        className="bg-[#1B1F26] p-8 md:p-12 rounded-lg w-full max-w-3xl text-white space-y-6"
-        style={{ backgroundColor: 'rgba(29, 35, 39, 0.6)' }}
+      className="bg-[#1B1F26] p-8 md:p-12 rounded-lg w-full max-w-3xl text-white space-y-6"
+      style={{ backgroundColor: 'rgba(29, 35, 39, 0.6)' }}
+>
+  <h1 className="text-4xl font-light text-center text-white">
+    Your{' '}
+    <span className="font-medium text-[#F8DDAC]">Compass</span>
+  </h1>
+  <h2 className="text-xl font-semibold text-center">Add your business</h2>
+
+  {/* Business Name */}
+  <div>
+    <label className="block text-sm capitalize">Business Name</label>
+    <input
+      {...register('name', { required: true })}
+      type="text"
+      className="w-full p-2 rounded border border-gray-400 bg-transparent text-white"
+      placeholder="Enter business name"
+    />
+    {errors.name && <p className="text-red-500 text-xs">Business name is required</p>}
+  </div>
+
+  {/* Category */}
+  <div>
+    <label className="block text-sm capitalize">Select Category</label>
+    <select {...register('category_id', { required: true })}
+      className="w-full p-2 rounded border border-gray-400 text-black"
+      defaultValue=""
+    >
+      <option disabled value="">Choose a category</option>
+      {categories.map((item) => (
+        <option key={item.id} value={item.id}>{item.name}</option>
+      ))}
+    </select>
+    {errors.category_id && <p className="text-red-500 text-xs">Category is required</p>}
+  </div>
+
+  {/* Description */}
+  <div>
+    <label className="block text-sm capitalize">Business Description</label>
+    <textarea
+      {...register('description', { required: true })}
+      className="w-full p-2 rounded border border-gray-400 bg-transparent text-white"
+      placeholder="Description"
+      rows="3"
+    ></textarea>
+    {errors.description && <p className="text-red-500 text-xs">Description is required</p>}
+  </div>
+
+  {/* Business Picture */}
+  <div>
+    <label className="block text-sm capitalize">Business Picture</label>
+    <input
+      type="file"
+      className="w-full p-2 rounded bg-transparent text-white"
+      {...register('image', { required: true })}
+    />
+    {errors.image && <p className="text-red-500 text-xs">Image is required</p>}
+  </div>
+
+  {/* Address */}
+  <div>
+    <label className="block text-sm capitalize">Address</label>
+    <input
+      {...register('address', { required: true })}
+      type="text"
+      className="w-full p-2 rounded border border-gray-400 bg-transparent text-white"
+      placeholder="Street address"
+    />
+    {errors.address && <p className="text-red-500 text-xs">Address is required</p>}
+  </div>
+
+  {/* Website */}
+  <div>
+    <label className="block text-sm capitalize">Website</label>
+    <input
+      {...register('website')}
+      type="url"
+      className="w-full p-2 rounded border border-gray-400 bg-transparent text-white"
+      placeholder="Enter website URL"
+    />
+  </div>
+
+  {/* City Selection */}
+  <div>
+    <label className="block text-sm capitalize">Select City</label>
+    <select {...register('city_id', { required: true })}
+      className="w-full p-2 rounded border border-gray-400 text-black"
+    >
+      <option disabled value="">Select a city</option>
+      {cities.map((city) => (
+        <option key={city.id} value={city.id}>{city.name}</option>
+      ))}
+    </select>
+    {errors.city_id && <p className="text-red-500 text-xs">City is required</p>}
+  </div>
+
+  {/* Contact Information */}
+  <div>
+    <label className="block text-sm capitalize">Email</label>
+    <input
+      {...register('email', { required: true })}
+      type="email"
+      className="w-full p-2 rounded border border-gray-400 bg-transparent text-white"
+      placeholder="Email Address"
+    />
+    {errors.email && <p className="text-red-500 text-xs">Email is required</p>}
+  </div>
+
+  <div>
+    <label className="block text-sm capitalize">Phone Number</label>
+    <input
+      {...register('phone_number', { required: true })}
+      type="tel"
+      className="w-full p-2 rounded border border-gray-400 bg-transparent text-white"
+      placeholder="Phone Number"
+    />
+    {errors.phone_number && <p className="text-red-500 text-xs">Phone number is required</p>}
+  </div>
+
+  {/* Buttons */}
+  <div className="flex justify-between gap-4 pt-6">
+    <Link to="/your-cancel-destination" className="w-1/2">
+      <button
+        style={{ backgroundColor: "white", color: "wheat" }}
+        type="reset"
+        className="w-full py-3 text-sm bg-white text-black rounded-lg border border-gray-300 hover:shadow-md transition duration-200"
       >
-        <h1 className="text-4xl font-light text-center text-white">
-          Your{' '}
-          <span className="font-medium text-[#F8DDAC]">Compass</span>
-        </h1>
-        <h2 className="text-xl font-semibold text-center">Add your business</h2>
+        Cancel
+      </button>
+    </Link>
+    <button
+      type="submit"
+      className="w-1/2 py-3 text-sm bg-yellow-400 text-white rounded-lg hover:bg-yellow-500"
+    >
+      Submit
+    </button>
+  </div>
+</form>
 
-        {/* Business Name */}
-        <div>
-          <label className="block text-sm capitalize">Business Name</label>
-          <input
-            {...register('name', { required: true })}
-            type="text"
-            className="w-full p-2 rounded border border-gray-400 bg-transparent text-white"
-            placeholder="Enter business name"
-          />
-          {errors.name && <p className="text-red-500 text-xs">Business name is required</p>}
-        </div>
-
-        {/* Category */}
-        <div>
-          <label className="block text-sm capitalize">Select Category</label>
-          <select {...register('category_id', { required: true })}
-            className="w-full p-2 rounded border border-gray-400 text-black"
-            defaultValue=""
-          >
-            <option disabled value="">Choose a category</option>
-            {categories.map((item) => (
-              <option key={item.id} value={item.id}>{item.name}</option>
-            ))}
-          </select>
-          {errors.category_id && <p className="text-red-500 text-xs">Category is required</p>}
-        </div>
-
-        {/* Description */}
-        <div>
-          <label className="block text-sm capitalize">Business Description</label>
-          <textarea
-            {...register('description', { required: true })}
-            className="w-full p-2 rounded border border-gray-400 bg-transparent text-white"
-            placeholder="Description"
-            rows="3"
-          ></textarea>
-          {errors.description && <p className="text-red-500 text-xs">Description is required</p>}
-        </div>
-
-        {/* Business Picture */}
-        <div>
-          <label className="block text-sm capitalize">Business Picture</label>
-          <input
-            type="file"
-            className="w-full p-2 rounded bg-transparent text-white"
-            {...register('image', { required: true })}
-          />
-          {errors.image && <p className="text-red-500 text-xs">Image is required</p>}
-        </div>
-
-        {/* Address */}
-        <div>
-          <label className="block text-sm capitalize">Address</label>
-          <input
-            {...register('address', { required: true })}
-            type="text"
-            className="w-full p-2 rounded border border-gray-400 bg-transparent text-white"
-            placeholder="Street address"
-          />
-          {errors.address && <p className="text-red-500 text-xs">Address is required</p>}
-        </div>
-
-        {/* City Selection */}
-        <div>
-          <label className="block text-sm capitalize">Select City</label>
-          <select {...register('city_id', { required: true })}
-            className="w-full p-2 rounded border border-gray-400 text-black"
-          >
-            <option disabled value="">Select a city</option>
-            {cities.map((city) => (
-              <option key={city.id} value={city.id}>{city.name}</option>
-            ))}
-          </select>
-          {errors.city_id && <p className="text-red-500 text-xs">City is required</p>}
-        </div>
-
-        {/* Contact Information */}
-        <div>
-          <label className="block text-sm capitalize">Email</label>
-          <input
-            {...register('email', { required: true })}
-            type="email"
-            className="w-full p-2 rounded border border-gray-400 bg-transparent text-white"
-            placeholder="Email Address"
-          />
-          {errors.email && <p className="text-red-500 text-xs">Email is required</p>}
-        </div>
-
-        <div>
-          <label className="block text-sm capitalize">Phone Number</label>
-          <input
-            {...register('phone_number', { required: true })}
-            type="tel"
-            className="w-full p-2 rounded border border-gray-400 bg-transparent text-white"
-            placeholder="Phone Number"
-          />
-          {errors.phone_number && <p className="text-red-500 text-xs">Phone number is required</p>}
-        </div>
-
-        {/* Buttons */}
-        <div className="flex justify-between mt-6">
-          <Link to="/your-cancel-destination" className="px-4 py-3 w-64 bg-white text-[#CAB284] rounded hover:bg-gray-200">
-            Cancel
-          </Link>
-          <button
-            type="submit"
-            className="px-4 py-3 w-64 bg-yellow-400 text-white rounded hover:bg-yellow-500"
-          >
-            Submit
-          </button>
-        </div>
-      </form>
 
       {/* Affichage du message de succès */}
       {successMessage && (
